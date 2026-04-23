@@ -23,16 +23,16 @@ Reverse-proxy labels (e.g. Traefik on `4860`) may route the **main** HTTP UI; th
 
 ```mermaid
 flowchart TB
-  subgraph hermes_compose [Hermes compose project]
-    H[Hermes Agent container]
-    data[(./data volume)]
-    code[/opt/hermes bind mount]
+  subgraph HC["Hermes compose project"]
+    H["Hermes Agent container"]
+    data[("Host data volume")]
+    code["Host hermes bind mount"]
     H --> data
     H --> code
   end
 
-  user[External users] -->|Messaging providers| H
-  admin[Operators] -->|HTTP API / health| H
+  user["External users"] -->|"Messaging"| H
+  admin["Operators"] -->|"HTTP API or health"| H
 ```
 
 ## Relationship to chat stack
