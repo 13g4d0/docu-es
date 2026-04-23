@@ -5,6 +5,9 @@ incoming/*.PDF
 .env
 .env.*
 
+# TdR full-text extract (run scripts/extract_tdr_pdf.py locally; do not redistribute without legal review)
+docs/tor-gap/_extracted/
+
 # MkDocs output
 /site/
 

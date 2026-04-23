@@ -2,7 +2,7 @@
 
 Suggested order. Treat each milestone as a shippable slice (PR-sized where possible).
 
-**Status (rolling):** Phases **0–2** complete in `docu`; next focus is **Phase 3** (TdR gap vs `incoming/tdr.pdf`) when you are ready to extract text from the PDF on a secure workstation.
+**Status (rolling):** Phases **0–2** complete; **Phase 3** scaffolded (TdR summary, dashboard criteria snapshot, gap workbook, PDF extract script; full text extract remains **local/gitignored**).
 
 ## Phase 0 — Bootstrap
 
@@ -38,13 +38,13 @@ Suggested order. Treat each milestone as a shippable slice (PR-sized where possi
 
 ## Phase 3 — TdR & gap (after solid as-built)
 
-| ID | Milestone |
-|----|-----------|
-| M3.1 | TdR executive summary (requirements & scope cited from `incoming/tdr.pdf`). |
-| M3.2 | **TdR ↔ implementation** matrix (full / partial / missing / N/A). |
-| M3.3 | **Technical gap report** (risk, effort, dependencies). |
-| M3.4 | **Documentation roadmap** derived from gaps (what to write next). |
-| M3.5 | Alignment with `dashboard.html` indicators. |
+| ID | Milestone | Status |
+|----|-----------|--------|
+| M3.1 | TdR executive summary (requirements & scope cited from `incoming/tdr.pdf`). | **Done** — `tor-gap/tdr-executive-summary.md` + extract script. |
+| M3.2 | **TdR ↔ implementation** matrix (full / partial / missing / N/A). | **Template** — `tor-gap/gap-analysis-workbook.md` (fill per criterion). |
+| M3.3 | **Technical gap report** (risk, effort, dependencies). | **Template** — section 2 in workbook. |
+| M3.4 | **Documentation roadmap** derived from gaps (what to write next). | **Todo** — promote findings into new `docu` pages after workshop. |
+| M3.5 | Alignment with `dashboard.html` indicators. | **Partial** — criteria snapshot + mapping section in workbook. |
 
 ## Phase 4 — Published docs site (`docs.domain.com`)
 

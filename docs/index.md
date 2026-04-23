@@ -45,6 +45,16 @@ Documentation is written for a **private** GitHub repository. **Do not** embed A
 | [Onboarding](developer/onboarding.md) | Engineers joining the project |
 | [Fork & upstream policy](developer/fork-upstream-policy.md) | Maintainers |
 
+## TdR & gap (Phase 3)
+
+| Page | Audience |
+|------|----------|
+| [TdR & gap hub](tor-gap/index.md) | PM / tech lead |
+| [TdR executive summary](tor-gap/tdr-executive-summary.md) | Stakeholders |
+| [Criteria (dashboard)](tor-gap/criteria-from-dashboard.md) | Evaluators |
+| [Gap workbook](tor-gap/gap-analysis-workbook.md) | Delivery team |
+| [Organizer notes](tor-gap/organizer-notes.md) | You (scrub before commit) |
+
 ## Milestones
 
 Progress is tracked in [ROADMAP-MILESTONES.md](ROADMAP-MILESTONES.md). Git pushes to `origin` are batched **per milestone**; see [PRIVATE-REPO-AND-PUSH.md](PRIVATE-REPO-AND-PUSH.md).

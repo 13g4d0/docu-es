@@ -58,6 +58,12 @@ nav:
   - Developer:
       - Onboarding: developer/onboarding.md
       - Fork & upstream policy: developer/fork-upstream-policy.md
+  - TdR & gap (M3):
+      - Hub: tor-gap/index.md
+      - TdR executive summary: tor-gap/tdr-executive-summary.md
+      - Criteria (dashboard snapshot): tor-gap/criteria-from-dashboard.md
+      - Gap workbook: tor-gap/gap-analysis-workbook.md
+      - Organizer notes: tor-gap/organizer-notes.md
   - ADRs:
       - Index: adr/README.md
       - ADR 0001 MkDocs: adr/0001-use-mkdocs-for-docu.md

@@ -7,7 +7,8 @@ This page lists **types** of artefacts that live in sibling repositories on the 
 | Relative path (inside devops checkout) | Purpose |
 |----------------------------------------|---------|
 | `docs/*.md` | Branded architecture and gateway runbooks (LiteLLM, Tailscale, Open-WebUI wiring). |
-| `map/dashboard.html` | Technical-debt / progress dashboard consumed in the browser from your internal deployment. |
+| `map/dashboard.html` | Technical-debt / progress dashboard (`CRITERIA` rubric + local persistence). Snapshot mirrored in `docu` → [Criteria from dashboard](../tor-gap/criteria-from-dashboard.md). |
+| `incoming/tdr.pdf` (in **docu** checkout) | Official TdR PDF — extract locally via `python scripts/extract_tdr_pdf.py` → `docs/tor-gap/_extracted/tdr-extract.txt` (gitignored). |
 | `ops.sh` | Delegates to IdentiaRAG `dev-stack.sh` for stack lifecycle. |
 
 Clone layout is organisation-specific; configure `DEVOPS_STACK_SCRIPT` or `DEVOPS_IDENTIARAG_ROOT` if paths differ.
