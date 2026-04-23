@@ -1,72 +1,72 @@
-# Publishing the documentation site
+# Publicar el sitio de documentación
 
-MkDocs writes static HTML to `site/`. This repo is set up for **GitHub Pages** using **GitHub Actions** (no S3/buckets).
+MkDocs genera HTML estático en `site/`. Este repo está preparado para **GitHub Pages** con **GitHub Actions** (sin S3 ni buckets).
 
-## GitHub Pages (default URL)
+## GitHub Pages (URL por defecto)
 
-With repository `13g4d0/docu`, the site is served at:
+Con el repositorio `13g4d0/docu-es`, el sitio se sirve en:
 
-**https://13g4d0.github.io/docu/**
+**https://13g4d0.github.io/docu-es/**
 
-`site_url` in `mkdocs.yml` matches that base so links and search behave correctly.
+`site_url` en `mkdocs.yml` coincide con esa base para que enlaces y búsqueda funcionen bien.
 
-### One-time setup in GitHub (UI)
+### Configuración única en GitHub (interfaz)
 
-1. Open the repo on GitHub → **Settings** → **Pages**.  
-2. Under **Build and deployment** → **Source**, choose **GitHub Actions** (not “Deploy from a branch” unless you switch workflows later).  
-3. Save. After the first successful run on `main`, the site URL appears in **Pages** and in the workflow job **deploy** output.
+1. Abre el repo en GitHub → **Settings** → **Pages**.  
+2. En **Build and deployment** → **Source**, elige **GitHub Actions** (no «Deploy from a branch» salvo que cambiéis de workflow más adelante).  
+3. Guarda. Tras la primera ejecución correcta en `main`, la URL del sitio aparece en **Pages** y en la salida del job **deploy** del workflow.
 
 ### Si solo ves el `README.md` (texto plano, sin menú Material)
 
-Eso casi siempre significa que Pages está sirviendo la **raíz del repo** (o la carpeta `/docs` con Jekyll), **no** el artefacto `site/` del workflow.
+Casi siempre significa que Pages está sirviendo la **raíz del repo** (o la carpeta `/docs` con Jekyll), **no** el artefacto `site/` del workflow.
 
 1. **Settings → Pages → Source** debe ser **GitHub Actions**, no *Deploy from a branch*.  
 2. Si antes elegiste **Branch: `main` / folder: `/ (root)`** o **`/docs`**, cámbialo a **GitHub Actions** y guarda.  
 3. En **Actions**, espera a que terminen en verde **`docs`** y **`pages build and deployment`**.  
-4. Abre de nuevo **https://13g4d0.github.io/docu/** (mejor recarga forzada **Ctrl+F5**).
+4. Abre de nuevo **https://13g4d0.github.io/docu-es/** (mejor recarga forzada **Ctrl+F5**).
 
-El sitio MkDocs correcto tiene **barra superior con pestañas** (Home, As-built, …) y **menú lateral**; la portada es **“Solution documentation”**, no el título del README `# docu`.
+El sitio MkDocs correcto tiene **barra superior con pestañas** (Inicio, As-built, …) y **menú lateral**; la portada es el título configurado en `site_name` de `mkdocs.yml`, no el encabezado `#` del README del repo.
 
 El workflow **copia `.nojekyll` a `site/`** tras `mkdocs build` para que, si Pages mezclara Jekyll, no procese los HTML estáticos.
 
 ### Diagramas Mermaid
 
-Los diagramas usan la **configuración nativa de Material** (`pymdownx.superfences` + `custom_fences` para `mermaid`). No uses el plugin `mkdocs-mermaid2` al mismo tiempo: rompe el renderizado.
+Los diagramas usan la **configuración nativa de Material** (`pymdownx.superfences` + `custom_fences` para `mermaid`). No uses el plugin `mkdocs-mermaid2` a la vez: rompe el renderizado.
 
-Si tras publicar no ves los diagramas: recarga forzada (**Ctrl+F5**) y comprueba en las herramientas de desarrollador (**Consola**) si algún bloqueador o CSP impide cargar el script de Mermaid (Material lo carga desde CDN en el bundle).
+Si tras publicar no ves los diagramas: recarga forzada (**Ctrl+F5**) y revisa en las herramientas de desarrollador (**Consola**) si un bloqueador o CSP impide cargar el script de Mermaid (Material lo incluye en el bundle / CDN según versión).
 
-The workflow file is `.github/workflows/docs.yml`: on every **push** to `main` it runs `mkdocs build --strict`, then **upload-pages-artifact** + **deploy-pages**.
+El workflow está en `.github/workflows/docs.yml`: en cada **push** a `main` ejecuta `mkdocs build --strict`, luego **upload-pages-artifact** + **deploy-pages**.
 
-### Private repository note
+### Repositorio público
 
-Visibility of a **private** repo’s GitHub Pages site depends on your GitHub plan and product (e.g. Enterprise). Confirm in [GitHub Docs — GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) who can view the published site. If the site must be internal-only, consider Enterprise or an alternative host with SSO.
+Este sitio (`docu-es`) está pensado como repositorio **público**: cualquiera puede clonar y ver el historial. No incluyas secretos ni datos personales. La documentación en **inglés** puede vivir en un repo hermano (`docu` u otro) con su propia URL de Pages.
 
-## Local build
+## Build local
 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements-docs.txt
 .venv/bin/mkdocs build --strict
-# output: ./site/
+# salida: ./site/
 ```
 
 ## Pull requests
 
-Every **pull request** against `main` runs the **build** job only (no deploy), so broken links or strict MkDocs errors fail CI before merge.
+Cada **pull request** contra `main` ejecuta solo el job de **build** (sin despliegue), de modo que enlaces rotos o errores estrictos de MkDocs fallen en CI antes del merge.
 
-## Custom domain later (optional)
+## Dominio personalizado (opcional)
 
-1. Add DNS: **CNAME** `docs` → `<user>.github.io` (or **A** / **AAAA** records per GitHub Pages custom domain docs).  
-2. In **Settings → Pages**, set **Custom domain** (e.g. `docs.example.com`).  
-3. Update `site_url` in `mkdocs.yml` to that HTTPS URL and redeploy.
+1. Añade DNS: **CNAME** `docs` → `<usuario>.github.io` (o registros **A** / **AAAA** según la doc de dominio personalizado de Pages).  
+2. En **Settings → Pages**, define **Custom domain** (p. ej. `docs.example.com`).  
+3. Actualiza `site_url` en `mkdocs.yml` a esa URL HTTPS y vuelve a desplegar.
 
-## Safety checklist
+## Lista de comprobación de seguridad
 
-| Check | Why |
-|-------|-----|
-| Do not publish `incoming/*.pdf` or `_extracted/` | Legal / confidentiality. |
-| Keep repo access aligned with who may read Pages | Especially for private repos. |
+| Comprobar | Motivo |
+|-----------|--------|
+| No publicar `incoming/*.pdf` ni `_extracted/` | Legal / confidencialidad. |
+| Revisar que el contenido sea adecuado para repo público | Historial Git y Issues son visibles. |
 
-## Related
+## Relacionado
 
-- [Private repo & push](PRIVATE-REPO-AND-PUSH.md)
+- [Git y política de push](PRIVATE-REPO-AND-PUSH.md)

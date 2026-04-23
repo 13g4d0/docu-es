@@ -1,49 +1,49 @@
-# Fork & upstream policy
+# Política de fork y *upstream*
 
-How this solution relates to **upstream open-source** projects without losing the ability to merge security fixes.
+Cómo se relaciona esta solución con proyectos **open source** de origen sin perder la capacidad de integrar parches de seguridad.
 
-## Open-WebUI fork
+## Fork de la interfaz web de chat
 
-| Track | Policy |
-|-------|--------|
-| **Your fork (`open-webui`)** | Canonical deployment artifact (`open-webui:local` or org registry tag). |
-| **Upstream `open-webui/open-webui`** | Periodically merge or cherry-pick releases matching your risk appetite. |
-| **IdentIA-specific env** | Branding (`WEBUI_NAME`), integration env vars (`IDENTIARAG_BASE_URL`), and patches live in the fork or build args — document each deviation in the fork `CHANGELOG` or an internal patch list. |
+| Pista | Política |
+|-------|----------|
+| **Tu fork (`open-webui`)** | Artefacto de despliegue canónico (etiqueta `open-webui:local` o registro de la org). |
+| **Proyecto público de referencia** | Fusionar o *cherry-pick* periódicamente versiones según apetito de riesgo. |
+| **Variables propias** | Marca (`WEBUI_NAME`), variables de integración (`IDENTIARAG_BASE_URL`) y parches en el fork o *build args* — documenta cada desviación en el `CHANGELOG` del fork o lista interna de parches. |
 
 ```mermaid
 flowchart LR
-  UP[Upstream Open WebUI release]
-  FK[Your fork main]
-  IMG[Container image tag]
+  UP[Lanzamiento upstream del chat web]
+  FK[Tu rama main del fork]
+  IMG[Etiqueta imagen contenedor]
 
   UP -->|merge / cherry-pick| FK
   FK --> IMG
 ```
 
-### Merge strategy (recommended)
+### Estrategia de merge (recomendada)
 
-1. Tag your fork before merging upstream (`pre-merge-<date>`).
-2. Merge upstream **minor** release branch or tag closest to your base (`0.8.12` baseline at doc time).
-3. Resolve conflicts in `package-lock`, Svelte components, and `backend/open_webui/env.py`.
-4. Run **lint + build + smoke chat** before promoting the image.
+1. Etiqueta el fork antes de fusionar *upstream* (`pre-merge-<fecha>`).
+2. Fusiona la rama o etiqueta **minor** de *upstream* más cercana a tu base (`0.8.12` en el momento de esta doc).
+3. Resuelve conflictos en `package-lock`, componentes Svelte y `backend/open_webui/env.py`.
+4. Ejecuta **lint + build + humo de chat** antes de promover la imagen.
 
-## IdentiaRAG lineage
+## Linaje del servicio RAG
 
-IdentiaRAG derives from the open-source **identiarag** / **nyrag** lineage (see package metadata and `src/nyrag` tree). Treat **`identiarag`** as the supported package name for new modules; keep `nyrag` compatibility only as long as required by existing configs.
+El servicio RAG deriva del linaje open source **identiarag** / **nyrag** (ver metadatos del paquete y árbol `src/nyrag`). Trata **`identiarag`** como nombre de paquete soportado para módulos nuevos; conserva compatibilidad `nyrag` solo mientras lo exijan configs existentes.
 
-- Track upstream for **security** updates to dependencies (`fastapi`, `sentence-transformers`, `scrapy`, …).
-- Re-run **ingestion + search smoke tests** after major upgrades because ranking behaviour can shift.
+- Sigue *upstream* para **seguridad** en dependencias (`fastapi`, `sentence-transformers`, `scrapy`, …).
+- Vuelve a ejecutar **tests de ingesta + búsqueda** tras upgrades mayores porque el comportamiento de ranking puede cambiar.
 
-## Hermes Agent image
+## Imagen del servicio de agentes
 
-The reference deployment uses a **provider-published** image (`ghcr.io/hostinger/hvps-hermes-agent` pattern). You do not fork the image; you **pin by digest** or tag in compose and follow provider release notes.
+El despliegue de referencia usa una imagen **publicada por el proveedor de alojamiento** (patrón de registro + nombre de imagen en compose). No bifurcas la imagen; **fija por *digest*** o etiqueta en Compose y sigue las notas de versión del proveedor.
 
-## Documentation (`docu`)
+## Documentación (este repositorio)
 
-- **Never** upstream `docu` to open-webui; it is an internal composite.
-- Cross-link upstream user docs for features we do not duplicate (e.g. full Open WebUI feature matrix).
+- **Nunca** subas este sitio documental como *upstream* al proyecto de chat público; es un compuesto interno.
+- Enlaza la documentación de usuario *upstream* para funciones que no dupliquemos (p. ej. matriz completa de funciones del chat web).
 
-## Related
+## Relacionado
 
-- [ADR 0003 — sibling layout](../adr/0003-identiarag-openwebui-sibling-layout.md)
-- [Developer onboarding](onboarding.md)
+- [ADR 0003 — layout en carpetas hermanas](../adr/0003-identiarag-openwebui-sibling-layout.md)
+- [Incorporación de desarrolladores](onboarding.md)

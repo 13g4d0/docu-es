@@ -1,64 +1,64 @@
-# Operations runbook (high level)
+# Runbook operativo (alto nivel)
 
-Commands and paths are described **relative to repositories** — set your own clone locations via environment variables where supported.
+Comandos y rutas son **relativos a repositorios** — define tus propias ubicaciones de clone vía variables de entorno donde se soporte.
 
-## Stack orchestration
+## Orquestación de la pila
 
-The **devops** repository ships `ops.sh`, which delegates to **IdentiaRAG**’s `dev-stack.sh` unless overridden:
+El repositorio **devops** incluye `ops.sh`, que delega en `dev-stack.sh` del **servicio RAG** salvo override:
 
-| Variable | Effect |
+| Variable | Efecto |
 |----------|--------|
-| `DEVOPS_STACK_SCRIPT` | Absolute path to the stack script to run. |
-| `DEVOPS_IDENTIARAG_ROOT` | Root of IdentiaRAG checkout; uses `<root>/dev-stack.sh`. |
+| `DEVOPS_STACK_SCRIPT` | Ruta absoluta al script de pila a ejecutar. |
+| `DEVOPS_IDENTIARAG_ROOT` | Raíz del checkout del servicio RAG; usa `<root>/dev-stack.sh`. |
 
-Typical `ops.sh` commands (see script `--help`): `status`, `health`, `deploy-webui`, `up`, `down`, `logs`, `doctor`, `smoke`.
+Comandos típicos de `ops.sh` (ver `--help` del script): `status`, `health`, `deploy-webui`, `up`, `down`, `logs`, `doctor`, `smoke`.
 
 ```mermaid
 flowchart LR
-  ops[ops.sh in devops repo]
-  ds[dev-stack.sh in IdentiaRAG]
+  ops[ops.sh en repo devops]
+  ds[dev-stack.sh en servicio RAG]
   dk[Docker CLI]
 
   ops --> ds
   ds --> dk
 ```
 
-## IdentiaRAG + Vespa compose
+## Servicio RAG + Compose Vespa
 
-From the IdentiaRAG repository root:
+Desde la raíz del repositorio del servicio RAG:
 
 ```bash
 docker compose up -d
 ```
 
-Use `docker compose ps` and service healthchecks defined in `compose.yml` (Vespa `ApplicationStatus`, UI `curl /health`).
+Usa `docker compose ps` y *healthchecks* definidos en `compose.yml` (Vespa `ApplicationStatus`, UI `curl /health`).
 
-## Open-WebUI image lifecycle
+## Ciclo de vida de la imagen de la interfaz
 
-From IdentiaRAG (via `dev-stack.sh` or `ops.sh`):
+Desde el servicio RAG (vía `dev-stack.sh` u `ops.sh`):
 
-- **Rebuild / deploy** — builds the image tag configured by `OPEN_WEBUI_IMAGE` (default pattern `open-webui:local`) from `OPEN_WEBUI_ROOT`.
+- **Rebuild / deploy** — construye la etiqueta configurada por `OPEN_WEBUI_IMAGE` (patrón por defecto `open-webui:local`) desde `OPEN_WEBUI_ROOT`.
 
-## Inference gateway & Hermes
+## Pasarela de inferencia y servicio de agentes
 
-These stacks usually live in **separate** compose projects on the host. Operate them with `docker compose` from their own directories: `up`, `down`, `logs`, `exec` for debugging.
+Suelen vivir en **proyectos Compose separados** en el host. Operarlos con `docker compose` desde sus directorios: `up`, `down`, `logs`, `exec` para depuración.
 
-!!! warning "Secrets"
-    After any change, verify `.env` files are still excluded from version control and from this documentation repo.
+!!! warning "Secretos"
+    Tras cualquier cambio, verifica que los `.env` sigan excluidos del control de versiones y de este repo documental.
 
-## Incident triage order
+## Orden de triage ante incidentes
 
-1. **Container health** — `docker ps`, compose healthchecks.
-2. **Logs** — `docker logs <container>` (gateway, Open-WebUI, IdentiaRAG, Vespa).
-3. **Connectivity** — from the app server, curl **internal** URLs (gateway `/health`, IdentiaRAG `/health` if exposed).
-4. **Mesh / local inference** — if using hybrid routing, verify VPN status before debugging application code.
+1. **Salud de contenedores** — `docker ps`, *healthchecks* de Compose.
+2. **Logs** — `docker logs <contenedor>` (pasarela, interfaz, servicio RAG, Vespa).
+3. **Conectividad** — desde el servidor de apps, `curl` a URLs **internas** (pasarela `/health`, servicio RAG `/health` si está expuesto).
+4. **Malla / inferencia local** — si usáis enrutado híbrido, verificar estado de la VPN antes de depurar código de aplicación.
 
-## Deeper operational docs
+## Documentación operativa detallada
 
-Authoritative low-level runbooks (branded gateway, Tailscale checks, etc.) should stay in the **devops** repository’s `docs/` tree so they can be updated alongside infrastructure — **do not** duplicate secrets here.
+Los runbooks de bajo nivel (pasarela concreta, comprobaciones de VPN en malla, etc.) deben permanecer en el árbol `docs/` del repositorio **devops** para actualizarse con la infraestructura — **no** duplicar secretos aquí.
 
-## Related
+## Relacionado
 
-- [Deployment patterns](deployment-patterns.md)
-- [Observability](observability.md)
-- [Meta — Internal references](../meta/internal-references.md)
+- [Patrones de despliegue](deployment-patterns.md)
+- [Observabilidad](observability.md)
+- [Meta — Referencias internas](../meta/internal-references.md)

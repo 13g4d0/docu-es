@@ -1,17 +1,17 @@
-# ADR 0003 — Sibling checkout layout for `dev-stack.sh`
+# ADR 0003 — Carpetas hermanas para `dev-stack.sh`
 
-- **Status:** Accepted  
-- **Date:** 2026-04-23  
+- **Estado:** Aceptado  
+- **Fecha:** 2026-04-23  
 
-## Context
+## Contexto
 
-`dev-stack.sh` resolves `OPEN_WEBUI_ROOT` relative to the IdentiaRAG checkout (`../open-webui` by default). Operators may override with environment variables.
+`dev-stack.sh` resuelve `OPEN_WEBUI_ROOT` relativo al checkout del servicio RAG (`../open-webui` por defecto). Los operadores pueden sobrescribir con variables de entorno.
 
-## Decision
+## Decisión
 
-Standardise on a **sibling directory layout** (`IdentiaRAG` next to `open-webui`) for development hosts, documented rather than hard-coded absolute paths in automation.
+Estandarizar un **layout en directorios hermanos** (servicio RAG junto al fork `open-webui`) en hosts de desarrollo, documentado en lugar de rutas absolutas fijas en la automatización.
 
-## Consequences
+## Consecuencias
 
-- **Positive:** Predictable relative paths; easier onboarding.
-- **Negative:** Clones in non-standard locations must export `OPEN_WEBUI_ROOT` explicitly.
+- **Positivo:** Rutas relativas predecibles; *onboarding* más simple.
+- **Negativo:** Clones en ubicaciones no estándar deben exportar `OPEN_WEBUI_ROOT` explícitamente.

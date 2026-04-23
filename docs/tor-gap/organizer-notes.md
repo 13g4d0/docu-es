@@ -1,20 +1,20 @@
-# Organizer notes
+# Notas del organizador
 
-**Instructions:** add your private workshop notes below. **Review before every commit** — remove anything that should not live in git (personal data, unpublished pricing, privileged legal advice).
+**Instrucciones:** añade debajo las notas privadas del taller. **Revisa antes de cada commit** — elimina lo que no deba vivir en git (datos personales, precios no publicados, asesoramiento legal privilegiado).
 
-## Session notes
+## Notas de sesión
 
-- *Date:*  
-- *Attendees:*  
+- *Fecha:*  
+- *Asistentes:*  
 
-### Bullets
-
-- 
-
-### Open questions
+### Viñetas
 
 - 
 
-### Links (internal only)
+### Preguntas abiertas
+
+- 
+
+### Enlaces (solo internos)
 
 - 

@@ -1,77 +1,77 @@
-# Developer onboarding
+# Incorporación de desarrolladores
 
-Clone URLs and hostnames are **your organisation’s** — this page only lists commands and layout expectations.
+Las URLs de clone y los nombres de host son **de tu organización** — esta página solo lista comandos y expectativas de layout.
 
-## Repository layout
+## Layout de repositorios
 
 ```text
 <workspace>/
-  IdentiaRAG/          # RAG engine + dev-stack.sh
-  open-webui/          # fork (sibling of IdentiaRAG)
-  devops/              # ops.sh, internal dashboards (optional sibling)
-  docu/                # this documentation site
+  IdentiaRAG/          # motor RAG + dev-stack.sh
+  open-webui/          # fork (hermano del servicio RAG)
+  devops/              # ops.sh, tableros internos (hermano opcional)
+  documentacion/       # este sitio MkDocs
 ```
 
-Override paths with `OPEN_WEBUI_ROOT`, `DEVOPS_IDENTIARAG_ROOT`, or `DEVOPS_STACK_SCRIPT` when layout differs.
+Sobrescribe rutas con `OPEN_WEBUI_ROOT`, `DEVOPS_IDENTIARAG_ROOT` o `DEVOPS_STACK_SCRIPT` si el layout difiere.
 
 ```mermaid
 flowchart TB
-  subgraph clone [Recommended clone order]
-    A[Clone IdentiaRAG]
-    B[Clone open-webui fork alongside]
-    C[Clone devops + docu optional]
+  subgraph clone [Orden de clone recomendado]
+    A[Clonar servicio RAG]
+    B[Clonar fork interfaz chat al lado]
+    C[Clonar devops + documentación opcional]
   end
   A --> B --> C
 ```
 
-## Prerequisites
+## Prerrequisitos
 
-| Tool | Notes |
-|------|--------|
-| **Git** | SSH or HTTPS to your remotes. |
-| **Docker** | For Vespa, Open-WebUI image builds, compose stacks. |
-| **Python 3.10–3.13** | IdentiaRAG `pyproject.toml` constraint. |
-| **Node + npm** | Open-WebUI frontend/backend build (`package.json`). |
-| **uv** (optional) | Faster Python env sync for IdentiaRAG upstream style. |
+| Herramienta | Notas |
+|-------------|--------|
+| **Git** | SSH o HTTPS a vuestros remotos. |
+| **Docker** | Para Vespa, builds de imagen de la interfaz, stacks Compose. |
+| **Python 3.10–3.13** | Restricción en `pyproject.toml` del servicio RAG. |
+| **Node + npm** | Build frontend/backend de la interfaz (`package.json`). |
+| **uv** (opcional) | Sincronización más rápida de entornos Python al estilo *upstream*. |
 
-## IdentiaRAG — local Python
+## Servicio RAG — Python local
 
 ```bash
 cd IdentiaRAG
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e ".[dev]"
-# optional: pip install -e ".[livekit]" for voice stack
+# opcional: pip install -e ".[livekit]" para pila de voz
 identiarag --help
 ```
 
-Run API locally per project README (`identiarag` CLI + uvicorn). Use `compose.yml` when you need real Vespa.
+Ejecuta la API local según el README del proyecto (`identiarag` CLI + uvicorn). Usa `compose.yml` cuando necesites Vespa real.
 
-## Open-WebUI — build from fork
+## Interfaz web de chat — build desde fork
 
 ```bash
 cd open-webui
 npm install
-# follow upstream README for full build; image build typically uses Dockerfile at repo root
+# seguir README upstream para build completo; la imagen suele usar Dockerfile en la raíz
 docker build -t open-webui:local .
 ```
 
-Your team may wrap this in `dev-stack.sh rebuild-webui` / `ops.sh deploy-webui`.
+Tu equipo puede envolver esto en `dev-stack.sh rebuild-webui` / `ops.sh deploy-webui`.
 
-## Running tests (smoke)
+## Tests (humo)
 
-- **IdentiaRAG**: `pytest` under `src/identiarag/tests` and `src/nyrag/tests` (see `pyproject.toml` `[tool.pytest]`).
-- **Open-WebUI**: `npm run test:frontend`, `npm run lint` — heavy; use in CI or before releases.
+- **Servicio RAG**: `pytest` bajo `src/identiarag/tests` y `src/nyrag/tests` (ver `pyproject.toml` `[tool.pytest]`).
+- **Interfaz web de chat**: `npm run test:frontend`, `npm run lint` — pesados; usar en CI o antes de releases.
 
-## PR conventions (suggested)
+## Convenciones de PR (sugeridas)
 
-| Rule | Why |
-|------|-----|
-| One logical change per PR | Easier review and rollback. |
-| No secrets in diff | Use placeholders; rely on secret manager in deploy. |
-| Update **this doc repo** when behaviour changes user-visible flows | Keeps `docu` truthful. |
+| Regla | Por qué |
+|-------|---------|
+| Un cambio lógico por PR | Revisión y *rollback* más simples. |
+| Sin secretos en el diff | Marcadores; secretos en despliegue. |
+| Actualizar **este repo documental** cuando cambien flujos visibles al usuario | Mantiene la documentación alineada con la realidad. |
 
-## Related
+## Relacionado
 
-- [Fork & upstream policy](fork-upstream-policy.md)
-- [As-built deployment patterns](../as-built/deployment-patterns.md)
+- [Política de fork y upstream](fork-upstream-policy.md)
+- [Patrones de despliegue as-built](../as-built/deployment-patterns.md)

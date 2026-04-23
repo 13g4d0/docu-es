@@ -1,21 +1,21 @@
-# IdentiaRAG — software architecture
+# Servicio RAG — arquitectura de software
 
-## Purpose
+## Propósito
 
-IdentiaRAG is a **Python** application for building RAG flows: crawl or ingest documents, index into **Vespa**, and answer user questions using **multi-query retrieval** and an **OpenAI-compatible** LLM for both query expansion and final answers.
+Aplicación **Python** para flujos RAG: rastrear o ingerir documentos, indexar en **Vespa** y responder preguntas con **recuperación multi-consulta** y un **LLM compatible OpenAI** tanto para expansión de consulta como para la respuesta final.
 
-Package metadata (`pyproject.toml`): FastAPI, Uvicorn, `sentence-transformers`, `pyvespa`, `openai`, Scrapy, etc.
+Metadatos del paquete (`pyproject.toml`): FastAPI, Uvicorn, `sentence-transformers`, `pyvespa`, `openai`, Scrapy, etc.
 
-## High-level retrieval pipeline
+## Pipeline de recuperación (alto nivel)
 
 ```mermaid
 flowchart LR
-  Q[User question]
-  QE[Query enhancement LLM]
+  Q[Pregunta del usuario]
+  QE[LLM mejora consulta]
   E[Embeddings]
   V[Vespa nearestNeighbor]
-  F[Chunk fusion / rank]
-  A[Answer LLM]
+  F[Fusión / ranking de chunks]
+  A[LLM respuesta]
 
   Q --> QE
   QE --> E
@@ -24,24 +24,24 @@ flowchart LR
   F --> A
 ```
 
-## Runtime entrypoints
+## Puntos de entrada en tiempo de ejecución
 
-| Entry | Module | Transport |
-|-------|--------|-----------|
-| CLI | `identiarag.cli` → `uvicorn.run(identiarag.api:app, …)` | HTTP server |
-| Package script | `identiarag = identiarag.cli:main` | Same |
+| Entrada | Módulo | Transporte |
+|---------|--------|------------|
+| CLI | `identiarag.cli` → `uvicorn.run(identiarag.api:app, …)` | Servidor HTTP |
+| Script de paquete | `identiarag = identiarag.cli:main` | Igual |
 
-The FastAPI application is defined in `src/identiarag/api.py` (`app = FastAPI(...)`). A parallel tree `src/nyrag/` exists from upstream/rebrand history — treat **`identiarag`** as the canonical product package for new work.
+La aplicación FastAPI está en `src/identiarag/api.py` (`app = FastAPI(...)`). Existe un árbol paralelo `src/nyrag/` por historial *upstream* / renombre — trata **`identiarag`** como paquete canónico para trabajo nuevo.
 
-## Key dependencies (in-process)
+## Dependencias clave (en proceso)
 
 ```mermaid
 flowchart TB
   api[FastAPI app identiarag.api]
-  cfg[Config / YAML projects]
-  vespa[Vespa HTTP client]
+  cfg[Config / proyectos YAML]
+  vespa[Cliente HTTP Vespa]
   emb[SentenceTransformer]
-  oai[OpenAI-compatible client]
+  oai[Cliente compatible OpenAI]
 
   api --> cfg
   api --> vespa
@@ -49,25 +49,25 @@ flowchart TB
   api --> oai
 ```
 
-## Docker services (`compose.yml`)
+## Servicios Docker (`compose.yml`)
 
 ```mermaid
 flowchart LR
   vespa[vespa:latest]
-  ui[ui build from repo]
-  embed[agent-embed build]
+  ui[build ui desde repo]
+  embed[build agent-embed]
 
   ui -->|VESPA_URL http://vespa| vespa
-  embed -->|LiveKit env| ui
+  embed -->|env LiveKit| ui
 ```
 
-Environment variables follow **12-factor** style: optional LiveKit, Deepgram, ElevenLabs keys are referenced by **name** only in this documentation — inject via `.env` or secret manager, never commit values.
+Las variables de entorno siguen estilo **12-factor**: claves opcionales LiveKit, Deepgram, ElevenLabs aparecen **solo por nombre** en esta documentación — inyectar vía `.env` o gestor de secretos, nunca versionar valores.
 
-## Cloud vs local Vespa
+## Vespa local vs nube
 
-Application code branches on **cloud mode** (environment / app state). Docker-per-project Vespa can be skipped when pointing to a single local Vespa or when `IDENTIARAG_SKIP_PROJECT_DOCKER` is set (see `_use_per_project_vespa_docker_container` in `api.py`).
+El código ramifica según **modo nube** (entorno / estado de la app). Vespa por proyecto en Docker puede omitirse al apuntar a un Vespa local único o con `IDENTIARAG_SKIP_PROJECT_DOCKER` (ver `_use_per_project_vespa_docker_container` en `api.py`).
 
-## Related
+## Relacionado
 
-- [C4 — Containers](c4-containers.md) for ports.
-- [Deployment patterns](deployment-patterns.md) for `dev-stack.sh` vs compose.
+- [C4 — Contenedores](c4-containers.md) para puertos.
+- [Patrones de despliegue](deployment-patterns.md) para `dev-stack.sh` frente a Compose.

@@ -1,17 +1,17 @@
-# ADR 0001 — Use MkDocs Material for the `docu` site
+# ADR 0001 — MkDocs Material para este sitio
 
-- **Status:** Accepted  
-- **Date:** 2026-04-23  
+- **Estado:** Aceptado  
+- **Fecha:** 2026-04-23  
 
-## Context
+## Contexto
 
-We need a static documentation site that can later publish to `docs.<domain>`, with search, navigation, and Mermaid diagrams.
+Necesitamos un sitio de documentación estático que más adelante pueda publicarse en `docs.<dominio>`, con búsqueda, navegación y diagramas Mermaid.
 
-## Decision
+## Decisión
 
-Use **MkDocs** with the **Material** theme and **mermaid2** plugin, built via a local Python virtual environment (PEP 668 safe).
+Usar **MkDocs** con el tema **Material** y Mermaid vía **Material / `pymdownx.superfences`** (sin el plugin `mkdocs-mermaid2` en paralelo, que entraba en conflicto), construido con un **virtualenv** local (seguro ante PEP 668).
 
-## Consequences
+## Consecuencias
 
-- **Positive:** Fast authoring in Markdown, good default UX, CI-friendly `mkdocs build`.
-- **Negative:** MkDocs 2.x upstream changes will require migration planning when upgrading.
+- **Positivo:** Autoría rápida en Markdown, buena UX por defecto, `mkdocs build` amigable con CI.
+- **Negativo:** Los cambios *upstream* de MkDocs 2.x exigirán plan de migración al actualizar.

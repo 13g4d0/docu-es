@@ -1,35 +1,35 @@
-# Documentation roadmap from gaps (M3.4)
+# Hoja de ruta documental desde brechas (M3.4)
 
-After you fill the [Gap workbook](gap-analysis-workbook.md), promote each **High / blocking** gap into a **concrete doc deliverable** below. This page is the backlog bridge between tender criteria and `docu` maintenance.
+Tras rellenar el [Cuaderno de brechas](gap-analysis-workbook.md), promueve cada brecha **alta / bloqueante** a un **entregable documental concreto** en la tabla inferior. Esta página es el puente entre criterios del pliego y el mantenimiento de **este sitio**.
 
-## How to use
+## Cómo usarlo
 
-1. Export or copy scores from `map/dashboard.html` (Markdown/CSV buttons).  
-2. For every criterion with **Coverage = None** or **Partial** and **risk = high**, add a row in the table below.  
-3. Open a tracking issue (or sub-milestone) per row; link the PR that updates the referenced page.
+1. Exporta o copia puntuaciones desde `map/dashboard.html` (botones Markdown/CSV).  
+2. Por cada criterio con **Cobertura = Ninguna** o **Parcial** y **riesgo alto**, añade una fila abajo.  
+3. Abre un issue de seguimiento (o sub-hito) por fila; enlaza el PR que actualice la página referenciada.
 
-## Suggested mapping (criterion → existing `docu` anchor)
+## Mapeo sugerido (criterio → ancla existente en este sitio)
 
-Starter matrix — **edit** after your workshop; IDs match [Criteria from dashboard](criteria-from-dashboard.md).
+Matriz inicial — **edita** tras el taller; los ids coinciden con [Criterios desde el tablero](criteria-from-dashboard.md).
 
-| Criterion | Likely gap theme | Extend these pages first | New page (if needed) |
-|-----------|------------------|--------------------------|----------------------|
-| 8.1.1 | RAG corpus + citations | `as-built/identiarag-software.md`, `sequence-requests.md` | `as-built/rag-citation-evidence.md` |
-| 8.1.2 | Legal / public-sector corpus | `user-guide/identiarag-for-analysts.md` | `tor-gap/corpus-map.md` (MAP norms scope) |
-| 8.1.3 | BYOK / sovereignty | `as-built/inference-gateway.md`, `network-security-matrix.md` | `as-built/byok-and-dpa.md` |
-| 8.2.1.x | Agent loops / reflection | *new* | `as-built/agent-orchestration.md` |
-| 8.2.2.x | Hybrid retrieval + rerank | `identiarag-software.md` | `as-built/vespa-ranking.md` |
-| 8.2.2-C | PDF grounding UI | `open-webui-software.md` | `user-guide/citations-and-pdf.md` |
-| 8.2.3.x | VPC / Private Link / residency | `network-security-matrix.md` | `as-built/cloud-landing-zone.md` |
-| 8.2.4.x | BOT training + shadowing | `user-guide/*`, `operations-runbook.md` | `as-built/bot-training-plan.md` |
-| 8.3.1 | Work plan / agile | `deployment-patterns.md` | `tor-gap/delivery-plan-outline.md` |
-| 8.4.x | Personnel evidence | *external HR* | `tor-gap/personnel-evidence-checklist.md` (non-CV data) |
-| 8.5.x | Golden dataset + technical test | *new* | `as-built/golden-dataset-and-eval.md` |
+| Criterio | Tema de brecha probable | Extender primero estas páginas | Página nueva (si hace falta) |
+|----------|-------------------------|------------------------------|------------------------------|
+| 8.1.1 | Corpus RAG + citas | `as-built/identiarag-software.md`, `sequence-requests.md` | `as-built/rag-citation-evidence.md` |
+| 8.1.2 | Corpus legal / sector público | `user-guide/identiarag-for-analysts.md` | `tor-gap/corpus-map.md` (ámbito normas MAP) |
+| 8.1.3 | BYOK / soberanía | `as-built/inference-gateway.md`, `network-security-matrix.md` | `as-built/byok-and-dpa.md` |
+| 8.2.1.x | Bucles de agente / reflexión | *nueva* | `as-built/agent-orchestration.md` |
+| 8.2.2.x | Recuperación híbrida + rerank | `identiarag-software.md` | `as-built/vespa-ranking.md` |
+| 8.2.2-C | UI de anclaje PDF | `open-webui-software.md` | `user-guide/citations-and-pdf.md` |
+| 8.2.3.x | VPC / Private Link / residencia | `network-security-matrix.md` | `as-built/cloud-landing-zone.md` |
+| 8.2.4.x | Formación BOT + *shadowing* | `user-guide/*`, `operations-runbook.md` | `as-built/bot-training-plan.md` |
+| 8.3.1 | Plan de trabajo / ágil | `deployment-patterns.md` | `tor-gap/delivery-plan-outline.md` |
+| 8.4.x | Evidencia de personal | *RRHH externo* | `tor-gap/personnel-evidence-checklist.md` (sin datos CV) |
+| 8.5.x | *Golden dataset* + prueba técnica | *nueva* | `as-built/golden-dataset-and-eval.md` |
 
 ```mermaid
 flowchart LR
-  WB[Gap workbook filled]
-  ROAD[this page M3.4]
+  WB[Cuaderno de brechas relleno]
+  ROAD[esta página M3.4]
   ASB[as-built/*.md]
   UG[user-guide/*.md]
   TG[tor-gap/*.md]
@@ -40,14 +40,14 @@ flowchart LR
   ROAD --> TG
 ```
 
-## Definition of done (per gap row)
+## Definición de hecho (por fila de brecha)
 
-- [ ] As-built text matches **observable** behaviour (version, env flag, or screenshot in private annex).  
-- [ ] No secrets in diff.  
-- [ ] `ROADMAP-MILESTONES.md` nudged if a new Phase 1/2 slice was delivered.  
-- [ ] Dashboard criterion row updated with evidence link (internal).
+- [ ] El texto as-built coincide con comportamiento **observable** (versión, flag de entorno o captura en anexo privado).  
+- [ ] Sin secretos en el diff.  
+- [ ] `ROADMAP-MILESTONES.md` actualizado si se entregó un nuevo trozo de fase 1/2.  
+- [ ] Fila del criterio en el tablero actualizada con enlace a evidencia (interno).
 
-## Related
+## Relacionado
 
-- [Tor-gap hub](index.md)  
-- [Milestone roadmap](../ROADMAP-MILESTONES.md) — Phase 4 publishing.
+- [Índice TdR y brechas](index.md)  
+- [Hitos del roadmap](../ROADMAP-MILESTONES.md) — fase 4 publicación.

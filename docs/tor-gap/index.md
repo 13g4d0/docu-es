@@ -1,46 +1,46 @@
-# Terms of Reference (TdR) & gap analysis
+# Términos de referencia (TdR) y análisis de brechas
 
-This section links **MAP–BID** procurement context, the **interactive dashboard** encoded in the devops repository, and **implementation** documentation (`as-built/`).
+Esta sección enlaza el contexto de contratación **MAP–BID**, el **tablero interactivo** versionado en el repositorio devops y la documentación de **implementación** (`as-built/`).
 
-!!! warning "Legal & confidentiality"
-    The authoritative TdR is the signed PDF. The machine extract under `docs/tor-gap/_extracted/` is **gitignored** — regenerate with `python scripts/extract_tdr_pdf.py` after placing `incoming/tdr.pdf`. Do not publish extracts outside authorised channels.
+!!! warning "Legal y confidencialidad"
+    El TdR autoritativo es el PDF firmado. El extracto automático bajo `docs/tor-gap/_extracted/` está **gitignored** — regenéralo con `python scripts/extract_tdr_pdf.py` tras colocar `incoming/tdr.pdf`. No publiques extractos fuera de canales autorizados.
 
-## Contents
+## Contenido
 
-| Page | Purpose |
-|------|---------|
-| [Executive summary (TdR)](tdr-executive-summary.md) | M3.1 — Objectives, BOT modality, scope in brief (bilingual cues). |
-| [Evaluation criteria (from dashboard)](criteria-from-dashboard.md) | Structured rubric mirrored from `dashboard.html` (`CRITERIA` array). |
-| [Gap analysis workbook](gap-analysis-workbook.md) | M3.2–M3.3 — matrix template + gap report outline. |
-| [Documentation roadmap from gaps](documentation-roadmap-from-gaps.md) | M3.4 — turn gaps into doc backlog. |
-| [Organizer notes](organizer-notes.md) | Paste **your** notes; scrub before sharing. |
+| Página | Uso |
+|--------|-----|
+| [Resumen ejecutivo (TdR)](tdr-executive-summary.md) | M3.1 — Objetivos, modalidad BOT, alcance breve (referencias bilingües). |
+| [Criterios de evaluación (desde tablero)](criteria-from-dashboard.md) | Rúbrica estructurada reflejada desde `dashboard.html` (array `CRITERIA`). |
+| [Cuaderno de análisis de brechas](gap-analysis-workbook.md) | M3.2–M3.3 — plantilla matricial + esquema de informe de brechas. |
+| [Hoja de ruta documental desde brechas](documentation-roadmap-from-gaps.md) | M3.4 — convertir brechas en *backlog* doc. |
+| [Notas del organizador](organizer-notes.md) | Pega **tus** notas; revisa antes de compartir. |
 
-## Extraction tooling
+## Herramienta de extracción
 
 ```bash
-python3 -m venv .venv   # if not already created
+python3 -m venv .venv   # si aún no existe
 .venv/bin/pip install -r requirements-docs.txt
 python3 scripts/extract_tdr_pdf.py
-# output: docs/tor-gap/_extracted/tdr-extract.txt
+# salida: docs/tor-gap/_extracted/tdr-extract.txt
 ```
 
-## Dashboard source of truth
+## Fuente de verdad del tablero
 
-The HTML dashboard embeds the same scoring structure as the TdR evaluation chapters (sections **8.1–8.5**). See [Internal references](../meta/internal-references.md) for the path to `dashboard.html` inside the devops checkout.
+El tablero HTML incrusta la misma estructura de puntuación que los capítulos de evaluación del TdR (secciones **8.1–8.5**). Ver [Referencias internas](../meta/internal-references.md) para la ruta a `dashboard.html` dentro del checkout devops.
 
 ```mermaid
 flowchart LR
-  PDF[TdR PDF]
+  PDF[PDF TdR]
   EXT[extract_tdr_pdf.py]
   TXT[_extracted/tdr-extract.txt]
   DASH[dashboard.html CRITERIA]
-  DOC[docu tor-gap/*.md]
+  DOC[páginas tor-gap/*.md]
 
   PDF --> EXT --> TXT
   DASH --> DOC
-  TXT -.->|human synthesis| DOC
+  TXT -.->|síntesis humana| DOC
 ```
 
-## Related roadmap
+## Roadmap relacionado
 
-[Milestone roadmap](../ROADMAP-MILESTONES.md) — Phase 3.
+[Hitos del roadmap](../ROADMAP-MILESTONES.md) — fase 3.

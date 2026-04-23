@@ -1,56 +1,56 @@
-# Gap analysis workbook (M3.2–M3.3)
+# Cuaderno de análisis de brechas (M3.2–M3.3)
 
-Use this template after refreshing the [TdR extract](index.md#extraction-tooling) and updating the **dashboard** scores.
+Usa esta plantilla tras refrescar el [extracto del TdR](index.md) (sección *Herramienta de extracción*) y actualizar las puntuaciones del **tablero**.
 
-## 1. TdR ↔ implementation matrix
+## 1. Matriz TdR ↔ implementación
 
-Duplicate the block per criterion (or import from dashboard CSV export).
+Duplica el bloque por criterio (o impórtalo desde export CSV del tablero).
 
-| Criterion ID | Requirement summary | As-built evidence (link to `docu` section / repo path) | Coverage | Gap / action |
-|----------------|--------------------|--------------------------------------------------------|----------|----------------|
-| 8.1.1 | … | … | Full / Partial / None | … |
+| ID criterio | Resumen del requisito | Evidencia as-built (enlace a sección de este sitio / ruta repo) | Cobertura | Brecha / acción |
+|-------------|----------------------|----------------------------------------------------------------|-----------|-----------------|
+| 8.1.1 | … | … | Completa / Parcial / Ninguna | … |
 | 8.1.2 | … | … | … | … |
 
-**Coverage legend**
+**Leyenda de cobertura**
 
-- **Full** — demonstrable in production or staging with artefacts.  
-- **Partial** — prototype exists, missing hardening or MAP-specific policy.  
-- **None** — not started.
+- **Completa** — demostrable en producción o staging con artefactos.  
+- **Parcial** — prototipo existe, falta endurecimiento o política específica MAP.  
+- **Ninguna** — no iniciado.
 
 ```mermaid
 quadrantChart
-  title Effort vs risk (example placement)
-  x-axis Low effort --> High effort
-  y-axis Low risk --> High risk
-  quadrant-1 Plan carefully
-  quadrant-2 Quick wins
-  quadrant-3 Monitor
-  quadrant-4 Reconsider
+  title Esfuerzo vs riesgo (ejemplo de colocación)
+  x-axis Bajo esfuerzo --> Alto esfuerzo
+  y-axis Bajo riesgo --> Alto riesgo
+  quadrant-1 Planificar con cuidado
+  quadrant-2 Victorias rápidas
+  quadrant-3 Monitorizar
+  quadrant-4 Replantear
   BYOK: [0.85, 0.75]
   Agent loops: [0.65, 0.55]
   Golden dataset: [0.45, 0.80]
 ```
 
-*(Replace placeholder points with your workshop outcomes.)*
+*(Sustituye los puntos de ejemplo por los resultados de vuestro taller.)*
 
-## 2. Technical gap report outline (M3.3)
+## 2. Esquema de informe técnico de brechas (M3.3)
 
-1. **Executive summary** — top 5 gaps blocking threshold **63/90**.  
-2. **Clustered findings** — Security / RAG quality / Agentic / Ops / Personnel.  
-3. **Effort & dependency** — rough T-shirt sizes (S/M/L) and prerequisite ordering.  
-4. **Documentation actions** — which `docu` pages to extend (link to roadmap).  
-5. **Residual risks** — items that cannot close before EOI without external input.
+1. **Resumen ejecutivo** — top 5 brechas que bloquean el umbral **63/90**.  
+2. **Hallazgos agrupados** — Seguridad / calidad RAG / agentes / Ops / Personal.  
+3. **Esfuerzo y dependencia** — tallas orientativas (S/M/L) y orden de prerequisitos.  
+4. **Acciones documentales** — qué páginas de este sitio extender (enlace a la hoja de ruta).  
+5. **Riesgos residuales** — ítems que no pueden cerrarse antes del EOI sin aporte externo.
 
-## 3. Dashboard alignment (M3.5)
+## 3. Alineación con tablero (M3.5)
 
-When the HTML dashboard adds new indicators, map each widget to:
+Cuando el tablero HTML añada indicadores nuevos, mapea cada widget a:
 
-- a **criterion ID** (e.g. `8.2.2-B`), and  
-- one or more **as-built** pages (e.g. `as-built/identiarag-software.md`).
+- un **id de criterio** (p. ej. `8.2.2-B`), y  
+- una o más páginas **as-built** (p. ej. `as-built/identiarag-software.md`).
 
-Keep the mapping table here or in the devops `README` next to `map/`.
+Mantén la tabla aquí o en el `README` de devops junto a `map/`.
 
-## Related
+## Relacionado
 
-- [Criteria from dashboard](criteria-from-dashboard.md)  
-- [Executive summary](tdr-executive-summary.md)
+- [Criterios desde el tablero](criteria-from-dashboard.md)  
+- [Resumen ejecutivo](tdr-executive-summary.md)

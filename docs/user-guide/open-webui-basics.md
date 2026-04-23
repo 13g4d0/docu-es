@@ -1,41 +1,41 @@
-# Open-WebUI — user basics
+# Interfaz web de chat — uso básico
 
-For **end users** and **workspace admins** using the deployed IdentIA-branded Open WebUI fork.
+Para **usuarios finales** y **administradores del espacio de trabajo** con el fork desplegado (marca y textos pueden personalizarse en vuestro entorno).
 
-## First sign-in
+## Primer acceso
 
-1. Open the URL provided by your administrator (HTTPS recommended).
-2. Complete registration if the instance allows self-signup; otherwise use the account your admin created.
-3. Set your profile and default model preferences under **Settings** (labels may vary slightly by version).
+1. Abre la URL que te facilite el administrador (HTTPS recomendado).
+2. Completa el registro si la instancia permite *self-signup*; si no, usa la cuenta que te haya creado el admin.
+3. Ajusta perfil y modelo por defecto en **Ajustes** (las etiquetas pueden variar ligeramente según versión).
 
 ```mermaid
 flowchart LR
-  A[Open URL] --> B{Has account?}
-  B -->|No| C[Register or request invite]
-  B -->|Yes| D[Sign in]
+  A[Abrir URL] --> B{¿Tienes cuenta?}
+  B -->|No| C[Registrarse o pedir invitación]
+  B -->|Sí| D[Iniciar sesión]
   C --> D
-  D --> E[Home / chat]
+  D --> E[Inicio / chat]
 ```
 
-## Starting a chat
+## Iniciar un chat
 
-- Use **New chat** to start a fresh thread.
-- Attach files or use **#** commands (if enabled) for knowledge / web features — see upstream Open WebUI docs for the exact feature set in your version (`0.8.x` fork baseline).
+- Usa **Nuevo chat** para un hilo limpio.
+- Adjunta archivos o usa comandos **#** (si están habilitados) para conocimiento / web — consulta la documentación del proyecto de chat *upstream* para el conjunto exacto de funciones en tu versión (línea base de fork `0.8.x`).
 
-## Roles (typical)
+## Roles (típico)
 
-| Role | Typical capabilities |
-|------|----------------------|
-| **User** | Chat, use allowed models, personal history. |
-| **Admin** | Model connections, user management, system prompts, feature toggles. |
+| Rol | Capacidades habituales |
+|-----|------------------------|
+| **Usuario** | Chat, modelos permitidos, historial personal. |
+| **Admin** | Conexiones de modelos, gestión de usuarios, *prompts* de sistema, *feature toggles*. |
 
-Exact RBAC is configured in your deployment; do not assume defaults from upstream screenshots.
+El RBAC exacto lo configura vuestro despliegue; no asumas los valores por defecto de capturas *upstream*.
 
-## IdentIA branding note
+## Nota sobre nombre de instancia
 
-The fork may set `WEBUI_NAME` to **IdentIA** (see `backend/open_webui/env.py`). UI copy and favicon may still show upstream assets unless your fork replaces them.
+El fork puede fijar `WEBUI_NAME` (ver `backend/open_webui/env.py`). La copia de la UI y el favicon pueden seguir mostrando recursos *upstream* salvo que el fork los sustituya.
 
-## Related
+## Relacionado
 
-- [Models & gateway](models-and-gateway.md)
-- [Open-WebUI — software](../as-built/open-webui-software.md) (technical background)
+- [Modelos y pasarela](models-and-gateway.md)
+- [Interfaz web de chat — software](../as-built/open-webui-software.md) (fondo técnico)

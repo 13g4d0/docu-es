@@ -1,41 +1,41 @@
-# C4 — Level 1: System context
+# C4 — Nivel 1: contexto del sistema
 
-Solution boundary and external dependencies. All labels are **logical** — replace endpoints with your environment’s values outside this repo.
+Límite de la solución y dependencias externas. Las etiquetas son **lógicas** — sustituye endpoints por los valores de tu entorno fuera de este repo.
 
 ```mermaid
 flowchart TB
-  user([Chat user])
+  user([Usuario de chat])
 
-  subgraph sol[Self-hosted AI stack]
-    webui[Open-WebUI]
-    rag[IdentiaRAG]
-    gw[Inference gateway]
-    agent[Hermes Agent]
+  subgraph sol[Pila de IA autohospedada]
+    webui[Interfaz web de chat]
+    rag[Servicio RAG]
+    gw[Pasarela de inferencia]
+    agent[Servicio de agentes]
   end
 
-  cloud[Cloud LLM APIs]
-  local[Local inference workstation]
-  mesh[Private mesh VPN]
-  vespa[Vespa search]
+  cloud[APIs LLM en la nube]
+  local[Estación de inferencia local]
+  mesh[VPN privada en malla]
+  vespa[Vespa]
 
   user -->|HTTPS| webui
-  user -->|optional HTTPS| rag
-  webui -->|OpenAI-compatible| gw
+  user -->|HTTPS opcional| rag
+  webui -->|Compatible OpenAI| gw
   gw -->|TLS| cloud
   gw --> mesh
   mesh -->|HTTP| local
   rag --> vespa
-  rag -->|OpenAI-compatible| cloud
-  agent -.->|optional| cloud
+  rag -->|Compatible OpenAI| cloud
+  agent -.->|opcional| cloud
 ```
 
-## Trust boundaries
+## Límites de confianza
 
-1. **Browser → Open-WebUI**: authentication and RBAC are enforced by Open-WebUI; terminate TLS at your reverse proxy or edge as required.
-2. **Open-WebUI → gateway**: use a **dedicated** gateway key; avoid reusing provider master keys in the browser.
-3. **Gateway → local inference**: route over a **private mesh** when the local API listens beyond localhost.
-4. **IdentiaRAG → Vespa**: Docker network in dev; mTLS / tokens for Vespa Cloud in production mode.
+1. **Navegador → interfaz web de chat**: autenticación y RBAC los aplica la interfaz; termina TLS en tu *reverse proxy* o borde según política.
+2. **Interfaz web de chat → pasarela**: usa una clave **dedicada** de pasarela; evita reutilizar claves maestras de proveedor en el navegador.
+3. **Pasarela → inferencia local**: enruta por **malla privada** cuando la API local escucha más allá de localhost.
+4. **Servicio RAG → Vespa**: red Docker en desarrollo; mTLS / tokens para Vespa Cloud en modo producción.
 
-## Out of scope at this level
+## Fuera de alcance en este nivel
 
-Detailed port matrices and volume paths: [C4 — Containers](c4-containers.md).
+Matrices de puertos detalladas y rutas de volúmenes: [C4 — Contenedores](c4-containers.md).

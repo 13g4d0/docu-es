@@ -1,34 +1,25 @@
-# Private repository and push workflow
+# Git y política de push
 
-## Goals
+## Objetivos
 
-- Keep **GitHub private** for `docu`.
-- **Push only at milestone boundaries** (agreed slices of documentation), not on every micro-edit.
-- Never store **API keys**, tokens, `.env` values, or customer-specific connection details in tracked files.
+- Este repositorio (`docu-es`) es **público**: el historial y el contenido son visibles para cualquiera. **No** subas claves API, tokens, valores de `.env` ni datos personales.
+- **Agrupa cambios por hitos** cuando sea posible (rodajas de documentación acordadas), en lugar de un micro-commit por línea.
+- La documentación **en inglés** puede vivir en otro repo (p. ej. `docu`) con su propio flujo y URL de Pages.
 
-## What the automation (or a build agent) needs to `git push`
+## Autenticación para `git push`
 
-After you switch the repo to **private**, pushes still use normal Git auth. Typical options:
+Los colaboradores usan la autenticación habitual de GitHub (SSH, `gh auth login`, PAT con alcance mínimo, etc.). Para **CI** que despliegue solo HTML, el workflow de Pages usa `GITHUB_TOKEN` (no hace falta PAT en el repo para el deploy estándar).
 
-1. **Deploy key (read/write)**  
-   Generate an SSH key pair dedicated to this repo, add the **public** key in GitHub → *Settings → Deploy keys* (allow write if you want pushes from CI/agent). Store the **private** key only on the host that runs pushes, with file permissions `0600`. Do not paste private keys into tickets or chat.
+Si en el futuro un agente automatizado necesita **push de commits** al repo, usa **Deploy key** o **PAT** con alcance mínimo y guarda el secreto solo en el host o en **GitHub Actions secrets** — nunca en el Markdown versionado.
 
-2. **Personal access token (HTTPS)**  
-   Prefer fine-scoped classic PAT or GitHub App token with **contents: write** on this repo only. Configure `git credential` or `GIT_ASKPASS` on the push host. Never commit the token; never paste it into the documentation repo.
+## Ritmo por hitos (recomendado)
 
-3. **Human push from your laptop**  
-   Clone the private repo with your normal GitHub auth (`gh auth login`, SSH agent, etc.), pull milestone work, then push. No extra secrets on the server.
+1. Acumula cambios doc en local o en rama hasta cerrar un **hito** de `ROADMAP-MILESTONES.md`.
+2. Revisa el diff: sin secretos (`Bearer`, `sk-`, IPs internas si tu política lo prohíbe, etc.).
+3. Commit(s) con mensaje claro (p. ej. `docs(M3.2): plantilla de matriz TdR`).
+4. `git push origin main`.
 
-The assistant does **not** need you to share tokens or private keys in chat. If push from the server is required, configure auth on that server using one of the patterns above, then say “push is configured” and request a milestone push when ready.
+## Si el repo pasa de privado a público (o al revés)
 
-## Milestone cadence
-
-1. Accumulate doc changes locally until a **milestone** from `ROADMAP-MILESTONES.md` is complete.
-2. Review diff for accidental secrets (grep for `Bearer`, `sk-`, `key=`, private IPs if your policy forbids them, etc.).
-3. Single commit (or a small, logical set) with a clear message referencing the milestone id (e.g. `docs(M1.2): system context diagram`).
-4. `git push origin main` (or your release branch policy).
-
-## If the repo was public and is now private
-
-- Update remotes if the URL changes (usually unchanged).
-- Re-audit `git log` and file history for anything that should not exist even in a private repo (defence in depth).
+- Revisa `git log` y archivos por contenido que no deba ser público (defensa en profundidad).
+- Actualiza enlaces en otros repos (devops, README del servicio RAG) que apunten a la URL de Pages correcta.

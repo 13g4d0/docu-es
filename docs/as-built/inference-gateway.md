@@ -1,79 +1,79 @@
-# Inference gateway (hybrid local + cloud)
+# Pasarela de inferencia (híbrido local + nube)
 
-This page describes the **pattern** implemented alongside Open-WebUI: a single **OpenAI-compatible gateway** (LiteLLM is the concrete product used in the reference deployment) with optional **local** inference on a workstation and **cloud** fallback.
+Describe el **patrón** desplegado junto a la interfaz web de chat: una única **pasarela compatible OpenAI** (en el despliegue de referencia se usa un producto concreto de ese tipo) con inferencia **local** opcional en estación de trabajo y **fallback** en la nube.
 
-!!! note "No live credentials"
-    Do not store `LITELLM_MASTER_KEY`, provider keys, or tailnet IPs in this repository. Configure them only in your runtime environment.
+!!! note "Sin credenciales en vivo"
+    No almacenes `LITELLM_MASTER_KEY`, claves de proveedor ni IPs de red privada en este repositorio. Configúralas solo en el entorno de ejecución.
 
-## Logical architecture
+## Arquitectura lógica
 
 ```mermaid
 flowchart LR
-  subgraph vps [Application server]
-    OW[Open-WebUI]
-    LL[LiteLLM]
+  subgraph vps [Servidor de aplicaciones]
+    OW[Interfaz web de chat]
+    LL[Pasarela]
   end
 
-  subgraph mesh [Private mesh]
-    TS[Tailscale or equivalent]
+  subgraph mesh [Malla privada]
+    TS[VPN en malla o equivalente]
   end
 
-  subgraph pc [Workstation]
-    LMS[LM Studio /v1]
+  subgraph pc [Estación de trabajo]
+    LMS[Runtime local /v1]
   end
 
   subgraph internet [Internet]
-    OR[OpenRouter or other cloud API]
+    OR[API agregadora u otro proveedor en la nube]
   end
 
-  OW -->|Bearer to gateway| LL
-  LL -->|Primary HTTP| TS
+  OW -->|Bearer a pasarela| LL
+  LL -->|HTTP primario| TS
   TS --> LMS
-  LL -->|Fallback TLS| OR
+  LL -->|TLS fallback| OR
 ```
 
-## Request path (conceptual)
+## Camino de la petición (conceptual)
 
-1. User selects a **logical alias** (example: `lm-auto`) in Open-WebUI.
-2. Open-WebUI sends `POST /v1/chat/completions` to the gateway.
-3. Gateway resolves the alias to:
-   - **Primary**: OpenAI-compatible URL of **local inference** (reachable only via private IP / mesh).
-   - **Fallback**: cloud model route (e.g. via OpenRouter) when the primary is unreachable.
-4. Response returns to Open-WebUI unchanged at the API contract level.
+1. El usuario elige un **alias lógico** (ejemplo: `lm-auto`) en la interfaz web de chat.
+2. La interfaz envía `POST /v1/chat/completions` a la pasarela.
+3. La pasarela resuelve el alias hacia:
+   - **Primario**: URL compatible OpenAI de la **inferencia local** (solo alcanzable por IP privada / malla).
+   - **Fallback**: ruta de modelo en la nube (p. ej. vía API agregadora) cuando el primario no responde.
+4. La respuesta vuelve a la interfaz sin cambiar el contrato de la API.
 
 ```mermaid
 sequenceDiagram
-  participant U as User
-  participant O as Open-WebUI
-  participant L as LiteLLM
-  participant P as Local inference
-  participant C as Cloud provider
+  participant U as Usuario
+  participant O as Interfaz web de chat
+  participant L as Pasarela
+  participant P as Inferencia local
+  participant C as Proveedor en la nube
 
   U->>O: Prompt
-  O->>L: chat.completions model=logical-alias
-  alt Primary healthy
-    L->>P: Forward completion
+  O->>L: chat.completions model=alias-lógico
+  alt Primario sano
+    L->>P: Reenvío completion
     P-->>L: Tokens
-  else Primary fails
-    L->>C: Fallback completion
+  else Fallo primario
+    L->>C: Completion de fallback
     C-->>L: Tokens
   end
-  L-->>O: OpenAI-shaped JSON / stream
-  O-->>U: Rendered answer
+  L-->>O: JSON / stream forma OpenAI
+  O-->>U: Respuesta renderizada
 ```
 
-## Gateway configuration concepts
+## Conceptos de configuración de la pasarela
 
-| Concept | Role |
-|---------|------|
-| `STORE_MODEL_IN_DB` | When true, model list and deployments may be edited via UI/API backed by PostgreSQL. |
-| Master key | Bearer token required on gateway endpoints; Open-WebUI stores the **same** value as its “OpenAI API key” for that connection. |
-| Fallback API | Explicit registration of fallback models per logical alias avoids “no fallback configured” errors at runtime. |
+| Concepto | Rol |
+|----------|-----|
+| `STORE_MODEL_IN_DB` | Si es true, lista de modelos y despliegues pueden editarse por UI/API respaldados por PostgreSQL. |
+| Clave maestra | Token Bearer exigido en endpoints de la pasarela; la interfaz guarda el **mismo** valor como «clave API OpenAI» de esa conexión. |
+| API de fallback | Registro explícito de modelos de *fallback* por alias evita errores «sin fallback» en tiempo de ejecución. |
 
-## LM Studio on the workstation
+## Runtime local en la estación de trabajo
 
-Local server must listen on **`0.0.0.0`** (not only `127.0.0.1`) if another machine (the VPS) forwards traffic via the mesh.
+El servidor local debe escuchar en **`0.0.0.0`** (no solo `127.0.0.1`) si otra máquina (la VPS) reenvía tráfico por la malla.
 
-## Alignment with internal branded doc
+## Alineación con documentación operativa interna
 
-Operational detail for a specific host set lives in your **devops** repository’s branded architecture/runbook markdown (not duplicated here to avoid drift and secret leakage).
+El detalle operativo para un conjunto de hosts concreto vive en el árbol `docs/` del repositorio **devops** (arquitectura y runbooks), no duplicado aquí para evitar deriva y filtrado de secretos.

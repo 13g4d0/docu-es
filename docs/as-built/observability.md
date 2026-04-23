@@ -1,29 +1,29 @@
-# Observability
+# Observabilidad
 
-What you can rely on **today** from the codebase and compose files, plus explicit gaps.
+En qué puedes apoyarte **hoy** según código y Compose, más brechas explícitas.
 
-## Health endpoints (patterns)
+## Endpoints de salud (patrones)
 
-| Component | Endpoint pattern | Source |
-|-----------|------------------|--------|
-| IdentiaRAG UI (compose) | `GET /health` on service port | `compose.yml` healthcheck |
-| Vespa | Config server `ApplicationStatus` | `compose.yml` healthcheck |
-| LiteLLM (sample compose) | `GET /health/liveliness` on container port **4000** | `docker-compose.yml` in gateway project |
-| Hermes | Depends on image; use published API port health if available | compose port mapping |
+| Componente | Patrón de endpoint | Fuente |
+|------------|-------------------|--------|
+| UI servicio RAG (Compose) | `GET /health` en el puerto del servicio | *healthcheck* en `compose.yml` |
+| Vespa | *ApplicationStatus* del *config server* | *healthcheck* en `compose.yml` |
+| Pasarela (Compose de ejemplo) | `GET /health/liveliness` en puerto de contenedor **4000** | `docker-compose.yml` del proyecto pasarela |
+| Servicio de agentes | Depende de la imagen; usar *health* del puerto API publicado si existe | mapeo de puertos Compose |
 
-Open-WebUI exposes many routes; use container logs and upstream **Open WebUI** documentation for optional `/health` variants in newer releases.
+La interfaz web de chat expone muchas rutas; usa logs del contenedor y la documentación del proyecto de chat *upstream* para variantes opcionales de `/health` en versiones nuevas.
 
 ```mermaid
 flowchart LR
-  subgraph probes [Synthetic probes]
-    H1[Compose healthcheck]
+  subgraph probes [*Probes* sintéticos]
+    H1[Healthcheck Compose]
     H2[ops.sh health]
-    H3[Manual curl]
+    H3[curl manual]
   end
 
-  subgraph signals [Runtime signals]
-    L[Container logs]
-    M[Process metrics optional]
+  subgraph signals [Señales en tiempo de ejecución]
+    L[Logs de contenedor]
+    M[Métricas de proceso opcional]
   end
 
   H1 --> L
@@ -33,20 +33,20 @@ flowchart LR
 
 ## Logging
 
-- **Docker**: `docker logs -f <container>` for Open-WebUI, IdentiaRAG, Vespa, LiteLLM, Hermes.
-- **IdentiaRAG**: Python logging via `identiarag.logger` helpers.
-- **Open-WebUI**: structured logs from FastAPI / Uvicorn; tune log level with env vars documented upstream.
+- **Docker**: `docker logs -f <contenedor>` para interfaz, servicio RAG, Vespa, pasarela, servicio de agentes.
+- **Servicio RAG**: logging Python vía helpers `identiarag.logger`.
+- **Interfaz web de chat**: logs estructurados FastAPI / Uvicorn; nivel con variables documentadas *upstream*.
 
-## Metrics & tracing (gap)
+## Métricas y *tracing* (brecha)
 
-- **Metrics**: no first-class Prometheus exposition is documented in this solution snapshot; treat as **gap** unless you add a sidecar or application instrumentation.
-- **Distributed tracing**: not wired by default; enable at reverse proxy or gateway if required.
+- **Métricas**: no hay exposición Prometheus de primera clase documentada en esta instantánea; trátalo como **brecha** salvo que añadas *sidecar* o instrumentación.
+- ***Tracing* distribuido**: no cableado por defecto; habilitar en *reverse proxy* o pasarela si hace falta.
 
-## Dashboards
+## Tableros
 
-Technical-debt / coverage dashboards may live alongside **devops** automation (see [Internal references](../meta/internal-references.md)). They are **not** prerequisites for running the stack.
+Tableros de deuda técnica / cobertura pueden vivir junto a la automatización **devops** (ver [Referencias internas](../meta/internal-references.md)). **No** son requisito para ejecutar la pila.
 
-## Related
+## Relacionado
 
-- [Operations runbook](operations-runbook.md)
-- [C4 — Containers](c4-containers.md)
+- [Runbook operativo](operations-runbook.md)
+- [C4 — Contenedores](c4-containers.md)

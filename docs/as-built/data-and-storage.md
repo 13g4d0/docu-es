@@ -1,12 +1,12 @@
-# Data & storage (as-built patterns)
+# Datos y almacenamiento (patrones as-built)
 
-No live credentials or hostnames. Variable **names** match upstream code where applicable.
+Sin credenciales en vivo ni nombres de host. Los **nombres** de variables coinciden con el código *upstream* cuando aplica.
 
-## Open-WebUI
+## Interfaz web de chat
 
-### Primary database
+### Base de datos principal
 
-Configured via `DATABASE_URL` (see `backend/open_webui/env.py`). Defaults to **SQLite** under `DATA_DIR` (`webui.db`). Production deployments often switch to **PostgreSQL** using `DATABASE_TYPE`, `DATABASE_HOST`, `DATABASE_USER`, `DATABASE_PASSWORD`, `DATABASE_NAME`, etc.
+Configurada vía `DATABASE_URL` (ver `backend/open_webui/env.py`). Por defecto **SQLite** bajo `DATA_DIR` (`webui.db`). En producción suele usarse **PostgreSQL** con `DATABASE_TYPE`, `DATABASE_HOST`, `DATABASE_USER`, `DATABASE_PASSWORD`, `DATABASE_NAME`, etc.
 
 ```mermaid
 erDiagram
@@ -32,36 +32,36 @@ erDiagram
   }
 ```
 
-The real schema has more tables (`tags`, `folders`, `groups`, …); the diagram shows **conceptual** relationships only.
+El esquema real tiene más tablas (`tags`, `folders`, `groups`, …); el diagrama es solo **conceptual**.
 
-### Optional Redis
+### Redis opcional
 
-`REDIS_URL` enables distributed cache / rate limiting patterns. Empty URL disables Redis features that depend on it.
+`REDIS_URL` habilita caché distribuida / límites de tasa. URL vacía desactiva funciones que dependen de Redis.
 
-### Files & static assets
+### Archivos y estáticos
 
-`DATA_DIR`, `STATIC_DIR`, `FRONTEND_BUILD_DIR` resolve filesystem paths inside the container image. Persist **`DATA_DIR`** on a volume for upgrades without losing chats.
+`DATA_DIR`, `STATIC_DIR`, `FRONTEND_BUILD_DIR` resuelven rutas dentro de la imagen. Persiste **`DATA_DIR`** en un volumen para actualizaciones sin perder chats.
 
 ---
 
-## IdentiaRAG
+## Servicio RAG
 
-### User settings file
+### Archivo de ajustes de usuario
 
-Per `identiarag/api.py`, user settings load from **`~/.identiarag/settings.json`** (path helper `_get_settings_file_path`). Contains UI state such as `active_project`, retrieval `hits`, `k`, etc.
+Según `identiarag/api.py`, los ajustes cargan desde **`~/.identiarag/settings.json`** (helper `_get_settings_file_path`). Contiene estado de UI como `active_project`, `hits`, `k`, etc.
 
 ### Vespa
 
-- **Docker mode**: Vespa data in a named volume (`vespa_data` in `compose.yml`).
-- **Project output**: host bind mount `./output` for indexed artefacts and exports.
-- **Cloud mode**: separate TLS / token configuration (see code paths around `get_cloud_secret_token`).
+- **Modo Docker**: datos de Vespa en volumen con nombre (`vespa_data` en `compose.yml`).
+- **Salida de proyecto**: *bind mount* `./output` para artefactos indexados y exportaciones.
+- **Modo nube**: TLS / token aparte (ver rutas de código alrededor de `get_cloud_secret_token`).
 
 ```mermaid
 flowchart LR
-  subgraph identia_data [IdentiaRAG data plane]
-    OUT[./output volume]
-    VDB[(Vespa volume)]
-    HF[(HuggingFace cache volume)]
+  subgraph identia_data [Plano de datos servicio RAG]
+    OUT[volumen ./output]
+    VDB[(volumen Vespa)]
+    HF[(volumen caché HuggingFace)]
   end
 
   API[FastAPI app] --> OUT
@@ -71,24 +71,24 @@ flowchart LR
 
 ---
 
-## LiteLLM + PostgreSQL (gateway stack pattern)
+## Pasarela + PostgreSQL (patrón stack pasarela)
 
-When `STORE_MODEL_IN_DB=True`, model definitions and routing metadata live in **PostgreSQL** (`DATABASE_URL` inside the gateway compose project). Back up this database with the same policy as Open-WebUI’s DB if you treat model routing as critical state.
-
----
-
-## Backup priorities (checklist)
-
-| Store | Why |
-|-------|-----|
-| Open-WebUI `DATA_DIR` / DB | Users, chats, configuration. |
-| Gateway Postgres | Model aliases, fallbacks, usage metadata. |
-| IdentiaRAG `output/` + Vespa volume | Indexed corpora; expensive to rebuild. |
-| `~/.identiarag/settings.json` | Operator UX state. |
+Con `STORE_MODEL_IN_DB=True`, definiciones de modelo y metadatos de enrutado viven en **PostgreSQL** (`DATABASE_URL` en el proyecto Compose de la pasarela). Haz backup de esta base con la misma política que la DB de la interfaz si el enrutado de modelos es estado crítico.
 
 ---
 
-## Related
+## Prioridades de backup (lista de comprobación)
 
-- [Deployment patterns](deployment-patterns.md)
-- [C4 — Containers](c4-containers.md)
+| Almacén | Por qué |
+|---------|---------|
+| `DATA_DIR` / DB de la interfaz | Usuarios, chats, configuración. |
+| Postgres de la pasarela | Alias de modelo, *fallbacks*, metadatos de uso. |
+| `output/` del servicio RAG + volumen Vespa | Corpus indexado; costoso de reconstruir. |
+| `~/.identiarag/settings.json` | Estado UX del operador. |
+
+---
+
+## Relacionado
+
+- [Patrones de despliegue](deployment-patterns.md)
+- [C4 — Contenedores](c4-containers.md)

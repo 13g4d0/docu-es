@@ -1,64 +1,64 @@
-# Request sequences
+# Secuencias de peticiones
 
-End-to-end views without embedding environment-specific URLs.
+Vistas extremo a extremo sin incrustar URLs específicas del entorno.
 
-## RAG question (IdentiaRAG UI)
+## Pregunta RAG (UI del servicio RAG)
 
 ```mermaid
 sequenceDiagram
   autonumber
-  actor U as User
-  participant UI as IdentiaRAG FastAPI
+  actor U as Usuario
+  participant UI as FastAPI servicio RAG
   participant V as Vespa
-  participant L as LLM API
+  participant L as API LLM
 
-  U->>UI: Submit question
-  UI->>L: Generate extra queries (optional)
-  L-->>UI: Expanded queries
-  UI->>UI: Embed queries
-  UI->>V: nearestNeighbor search
-  V-->>UI: Ranked chunks
-  UI->>L: Answer with retrieved context only
-  L-->>UI: Final answer
+  U->>UI: Enviar pregunta
+  UI->>L: Generar consultas extra (opcional)
+  L-->>UI: Consultas expandidas
+  UI->>UI: Incrustar consultas
+  UI->>V: Búsqueda nearestNeighbor
+  V-->>UI: Chunks rankeados
+  UI->>L: Respuesta solo con contexto recuperado
+  L-->>UI: Respuesta final
   UI-->>U: Render / stream
 ```
 
-## Chat via Open-WebUI through gateway
+## Chat vía interfaz web de chat a través de la pasarela
 
 ```mermaid
 sequenceDiagram
   autonumber
-  actor U as User
-  participant W as Open-WebUI
-  participant G as LiteLLM
-  participant P as Primary upstream
-  participant F as Fallback upstream
+  actor U as Usuario
+  participant W as Interfaz web de chat
+  participant G as Pasarela
+  participant P as Upstream primario
+  participant F as Upstream fallback
 
-  U->>W: Message
+  U->>W: Mensaje
   W->>G: /v1/chat/completions
-  alt primary OK
-    G->>P: Forward
+  alt primario OK
+    G->>P: Reenvío
     P-->>G: Completion
-  else primary fails
-    G->>F: Fallback policy
+  else fallo primario
+    G->>F: Política fallback
     F-->>G: Completion
   end
-  G-->>W: Response
-  W-->>U: UI stream
+  G-->>W: Respuesta
+  W-->>U: Stream UI
 ```
 
-## Optional: Open-WebUI calls IdentiaRAG for RAG features
+## Opcional: la interfaz llama al servicio RAG para funciones RAG
 
 ```mermaid
 sequenceDiagram
-  participant W as Open-WebUI
-  participant R as IdentiaRAG
+  participant W as Interfaz web de chat
+  participant R as Servicio RAG
   participant V as Vespa
 
-  W->>R: Feature-specific HTTP call
-  R->>V: Retrieval
+  W->>R: HTTP por función
+  R->>V: Recuperación
   V-->>R: Chunks
-  R-->>W: JSON / partial context
+  R-->>W: JSON / contexto parcial
 ```
 
-Exact paths depend on fork configuration; trace calls starting at Open-WebUI backend routers that reference `IDENTIARAG_BASE_URL`.
+Las rutas exactas dependen de la configuración del fork; rastrea llamadas desde los routers backend de la interfaz que referencian `IDENTIARAG_BASE_URL`.

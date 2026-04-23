@@ -1,32 +1,32 @@
-# Repository map
+# Mapa de repositorios
 
-Tracked repositories that form the solution (names illustrative; clone URLs are organisation-specific).
+Repositorios versionados que forman la solución (nombres ilustrativos; las URLs de clone son propias de cada organización).
 
 ```mermaid
 flowchart LR
-  subgraph repos [Repositories]
-    IR[IdentiaRAG]
-    OW[open-webui fork]
-    DO[devops / ops scripts]
-    DC[Docker compose dirs on host]
-    DU[docu]
+  subgraph repos [Repositorios]
+    IR[Servicio RAG]
+    OW[fork interfaz chat]
+    DO[devops / scripts ops]
+    DC[Directorios Compose en el host]
+    DU[sitio documentación]
   end
 
   IR -->|"dev-stack.sh, compose"| OW
-  DO -->|"ops.sh, maps, runbooks"| IR
+  DO -->|"ops.sh, mapas, runbooks"| IR
   DO --> OW
-  DC -->|"litellm, hermes stacks"| DO
-  DU -.->|"documents"| IR
-  DU -.->|"documents"| OW
-  DU -.->|"documents"| DC
+  DC -->|"pasarela, stacks agentes"| DO
+  DU -.->|"documenta"| IR
+  DU -.->|"documenta"| OW
+  DU -.->|"documenta"| DC
 ```
 
-| Repository / artefact | Role |
-|------------------------|------|
-| **IdentiaRAG** | RAG engine, Vespa integration, FastAPI `identiarag.api:app`, CLI `identiarag`. |
-| **open-webui** (fork) | Chat product; build produces image tag such as `open-webui:local` used by `dev-stack.sh`. |
-| **devops** | Operational scripts, architecture markdown, technical-debt dashboard assets (path varies per host). |
-| **docu** (this repo) | Human-facing documentation site source (MkDocs). |
-| **Host compose directories** | Independent Docker Compose projects (e.g. inference gateway DB + proxy, Hermes) managed outside `dev-stack.sh` on some hosts. |
+| Repositorio / artefacto | Rol |
+|-------------------------|-----|
+| **Servicio RAG** | Motor RAG, integración Vespa, FastAPI `identiarag.api:app`, CLI `identiarag`. |
+| **Fork interfaz chat** | Producto de chat; el build produce una etiqueta de imagen (p. ej. `open-webui:local`) usada por `dev-stack.sh`. |
+| **devops** | Scripts operativos, markdown de arquitectura, activos de tablero de deuda (ruta variable por host). |
+| **Este repo** | Fuente del sitio MkDocs de documentación humana. |
+| **Directorios Compose en el host** | Proyectos Docker Compose independientes (p. ej. DB + proxy de pasarela, servicio de agentes) gestionados fuera de `dev-stack.sh` en algunos hosts. |
 
-**Path convention (development host):** teams often clone sibling directories (e.g. `open-webui` next to `IdentiaRAG`) so `IDENTIARAG_ROOT` / `OPEN_WEBUI_ROOT` resolve correctly in `dev-stack.sh`. Exact filesystem layout is **not** committed here.
+**Convención de rutas (host de desarrollo):** suele clonarse en directorios hermanos (p. ej. carpeta del fork junto al del servicio RAG) para que `IDENTIARAG_ROOT` / `OPEN_WEBUI_ROOT` resuelvan bien en `dev-stack.sh`. El layout exacto del filesystem **no** se versiona aquí.

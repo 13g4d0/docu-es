@@ -1,17 +1,17 @@
-# Open-WebUI — software architecture
+# Interfaz web de chat — arquitectura de software
 
-## Purpose
+## Propósito
 
-**Open WebUI** (this fork, version in `package.json`) is a self-hosted AI platform: chat UI, model management, RAG features, tools, and integrations with **Ollama** and **OpenAI-compatible** providers.
+**Interfaz web de chat** (este fork, versión en `package.json`): plataforma de IA autohospedada — UI de chat, gestión de modelos, funciones RAG, herramientas e integración con **motores locales de inferencia** y proveedores **compatibles OpenAI**.
 
-Upstream marketing and full feature list live in the project `README.md`; this page focuses on **structure** relevant to integration with IdentiaRAG and an external inference gateway.
+El marketing y el listado completo de funciones están en el `README.md` del proyecto; esta página se centra en la **estructura** relevante para integrar el **servicio RAG** y una **pasarela de inferencia** externa.
 
-## Process model
+## Modelo de proceso
 
 ```mermaid
 flowchart TB
   subgraph frontend [SvelteKit / Vite]
-    UI[Browser UI]
+    UI[UI en navegador]
   end
 
   subgraph backend [Python FastAPI]
@@ -25,39 +25,39 @@ flowchart TB
   UI -->|REST + SSE| MAIN
 ```
 
-The backend entrypoint is `backend/open_webui/main.py` (large FastAPI application with SQLAlchemy, optional Redis, background tasks).
+El backend arranca en `backend/open_webui/main.py` (gran aplicación FastAPI con SQLAlchemy, Redis opcional, tareas en segundo plano).
 
-## Integration with IdentiaRAG (dev pattern)
+## Integración con el servicio RAG (patrón dev)
 
-`dev-stack.sh` runs the Open-WebUI container with:
+`dev-stack.sh` ejecuta el contenedor de la interfaz con:
 
-- `IDENTIARAG_BASE_URL` pointing at the IdentiaRAG API on the **host** (`host.docker.internal:8000` pattern) so the chat UI can call RAG endpoints from inside the container.
+- `IDENTIARAG_BASE_URL` apuntando a la API del servicio RAG en el **host** (patrón `host.docker.internal:8000`) para que la UI llame a endpoints RAG desde dentro del contenedor.
 
 ```mermaid
 sequenceDiagram
-  participant B as Browser
-  participant W as Open-WebUI container
-  participant R as IdentiaRAG :8000
-  participant G as Inference gateway
+  participant B as Navegador
+  participant W as Contenedor interfaz chat
+  participant R as Servicio RAG :8000
+  participant G as Pasarela de inferencia
 
-  B->>W: Chat completion request
-  alt Model routed to gateway
-    W->>G: OpenAI-compatible POST /v1/chat/completions
-    G-->>W: Stream or JSON response
+  B->>W: Petición de completion de chat
+  alt Modelo enrutado a pasarela
+    W->>G: POST compatible OpenAI /v1/chat/completions
+    G-->>W: Stream o JSON
   end
-  opt RAG features call IdentiaRAG
-    W->>R: HTTP per feature endpoints
-    R-->>W: Retrieved context / UI data
+  opt Funciones RAG llaman al servicio RAG
+    W->>R: HTTP por endpoints de funciones
+    R-->>W: Contexto recuperado / datos UI
   end
-  W-->>B: UI update / stream
+  W-->>B: Actualización UI / stream
 ```
 
-## Fork maintenance
+## Mantenimiento del fork
 
-Track deliberate differences from upstream (themes, branding, patches) in your own `CHANGELOG` or `README_CUSTOM_MODIFICATIONS` if present. Version `0.8.12` in `package.json` is the **fork baseline** at documentation time — update when you bump.
+Registra las diferencias deliberadas respecto al *upstream* (temas, parches) en vuestro propio `CHANGELOG` o `README_CUSTOM_MODIFICATIONS` si existe. La versión `0.8.12` en `package.json` es la **línea base del fork** en el momento de la documentación — actualízala al subir versión.
 
-## Related
+## Relacionado
 
-- [Open-WebUI routers](open-webui-routers.md) for the FastAPI route map.
-- [Inference gateway](inference-gateway.md) for LiteLLM-centric routing.
-- [Deployment patterns](deployment-patterns.md) for image build and `docker run` flags.
+- [Routers HTTP](open-webui-routers.md) para el mapa de rutas FastAPI.
+- [Pasarela de inferencia](inference-gateway.md) para enrutado centrado en la pasarela.
+- [Patrones de despliegue](deployment-patterns.md) para build de imagen y flags `docker run`.

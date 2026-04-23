@@ -1,31 +1,31 @@
-# Internal references (outside this repo)
+# Referencias internas (fuera de este repo)
 
-This page lists **types** of artefacts that live in sibling repositories on the same documentation host. **Do not** paste production URLs, API keys, or customer hostnames into `docu`.
+Tipos de artefactos que viven en repositorios hermanos en el mismo host documental. **No** pegues URLs de producción, claves API ni nombres de host de clientes en el sitio MkDocs.
 
-## Devops repository
+## Repositorio devops
 
-| Relative path (inside devops checkout) | Purpose |
-|----------------------------------------|---------|
-| `docs/*.md` | Branded architecture and gateway runbooks (LiteLLM, Tailscale, Open-WebUI wiring). |
-| `map/dashboard.html` | Technical-debt / progress dashboard (`CRITERIA` rubric + local persistence). Snapshot mirrored in `docu` → [Criteria from dashboard](../tor-gap/criteria-from-dashboard.md). |
-| `incoming/tdr.pdf` (in **docu** checkout) | Official TdR PDF — extract locally via `python scripts/extract_tdr_pdf.py` → `docs/tor-gap/_extracted/tdr-extract.txt` (gitignored). |
-| `ops.sh` | Delegates to IdentiaRAG `dev-stack.sh` for stack lifecycle. |
+| Ruta relativa (dentro del checkout devops) | Uso |
+|--------------------------------------------|-----|
+| `docs/*.md` | Arquitectura y runbooks (cableado pasarela, VPN en malla, interfaz de chat). |
+| `map/dashboard.html` | Tablero de deuda / progreso (rúbrica `CRITERIA` + persistencia local). Instantánea reflejada en el sitio → [Criterios desde el tablero](../tor-gap/criteria-from-dashboard.md). |
+| `incoming/tdr.pdf` (en el checkout **de documentación**) | PDF oficial TdR — extraer localmente con `python scripts/extract_tdr_pdf.py` → `docs/tor-gap/_extracted/tdr-extract.txt` (gitignored). |
+| `ops.sh` | Delega en `dev-stack.sh` del servicio RAG para el ciclo de vida de la pila. |
 
-Clone layout is organisation-specific; configure `DEVOPS_STACK_SCRIPT` or `DEVOPS_IDENTIARAG_ROOT` if paths differ.
+El layout de clones es por organización; configura `DEVOPS_STACK_SCRIPT` o `DEVOPS_IDENTIARAG_ROOT` si las rutas difieren.
 
-## IdentiaRAG repository
+## Repositorio del servicio RAG
 
-| Path | Purpose |
-|------|---------|
-| `dev-stack.sh` | Open-WebUI + IdentiaRAG orchestration. |
-| `compose.yml` | Vespa + UI + optional agent-embed. |
-| `documentation/` | Upstream IdentiaRAG docs tree (distinct from this MkDocs site). |
+| Ruta | Uso |
+|------|-----|
+| `dev-stack.sh` | Orquestación interfaz de chat + servicio RAG. |
+| `compose.yml` | Vespa + UI + agent-embed opcional. |
+| `documentation/` | Árbol de docs *upstream* del servicio RAG (distinto de este sitio MkDocs). |
 
-## How this relates to M0.3
+## Relación con M0.3
 
-- **MkDocs (`docu`)** = curated as-built + roadmap for the combined solution.
-- **Dashboard HTML** = operational / debt tracking; keep it in **devops** and link internally via your wiki or password-protected static host — not via hard-coded production URLs in git.
+- **Este sitio MkDocs** = documentación *as-built* curada + roadmap de la solución combinada.
+- **HTML del tablero** = seguimiento operativo / deuda; mantenlo en **devops** y enlázalo internamente vía wiki o host estático con acceso controlado — sin URLs de producción hardcodeadas en git.
 
-## Related
+## Relacionado
 
-- [Operations runbook](../as-built/operations-runbook.md)
+- [Runbook operativo](../as-built/operations-runbook.md)

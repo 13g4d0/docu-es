@@ -1,53 +1,53 @@
-# C4 — Level 2: Containers
+# C4 — Nivel 2: contenedores
 
-Runnable and independently deployable units. Ports shown are **defaults from source**; your host may remap them.
+Unidades ejecutables e independientes. Los puertos son **valores por defecto del código**; tu host puede remapearlos.
 
 ```mermaid
 flowchart TB
-  subgraph identia_compose [IdentiaRAG compose.yml]
+  subgraph identia_compose [compose.yml del servicio RAG]
     vespa[Vespa :8080 / :19071]
-    ui[IdentiaRAG UI build :8000]
+    ui[Build UI servicio RAG :8000]
     embed[agent-embed :3000]
   end
 
-  subgraph webui_run [Typical dev-stack docker run]
-    webui[Open-WebUI container :8080 internal]
+  subgraph webui_run [docker run típico dev-stack]
+    webui[Contenedor interfaz chat :8080 interno]
   end
 
-  subgraph gateway_stack [Gateway compose pattern]
-    litellm[LiteLLM :4000 internal]
+  subgraph gateway_stack [Patrón Compose pasarela]
+    litellm[Pasarela :4000 interno]
     pg[(PostgreSQL)]
     litellm --> pg
   end
 
-  subgraph hermes_stack [Hermes compose pattern]
-    hermes[Hermes Agent]
+  subgraph hermes_stack [Patrón Compose agentes]
+    hermes[Servicio de agentes]
   end
 
-  browser((Browser)) --> ui
+  browser((Navegador)) --> ui
   browser --> webui
   browser --> litellm
   ui --> vespa
   webui -->|IDENTIARAG_BASE_URL| ui
   webui --> litellm
-  hermes -.->|optional| litellm
+  hermes -.->|opcional| litellm
 ```
 
-## Port reference (defaults in tree)
+## Referencia de puertos (por defecto en el árbol)
 
-| Container / process | Default host port | Notes |
-|---------------------|-------------------|--------|
-| IdentiaRAG UI (`compose.yml` → `ui`) | `8000` | FastAPI + static UI (`identiarag.api:app`). |
-| Vespa | `8080`, `19071` | Query + config server. |
-| agent-embed | `3000` | Separate image context `../agent-embed`. |
-| Open-WebUI (`dev-stack.sh`) | `3000` → container `8080` | `-p OPEN_WEBUI_HOST_PORT:OPEN_WEBUI_CONTAINER_PORT`. |
-| LiteLLm (sample compose) | published by host | Internal app listens on **4000** in example file; host mapping varies. |
-| Hermes Agent | `8642` (+ internal `4860`) | Published port for optional API in sample compose. |
+| Contenedor / proceso | Puerto host por defecto | Notas |
+|------------------------|-------------------------|--------|
+| UI servicio RAG (`compose.yml` → `ui`) | `8000` | FastAPI + UI estática (`identiarag.api:app`). |
+| Vespa | `8080`, `19071` | Consulta + *config server*. |
+| agent-embed | `3000` | Contexto de imagen aparte `../agent-embed`. |
+| Interfaz de chat (`dev-stack.sh`) | `3000` → contenedor `8080` | `-p OPEN_WEBUI_HOST_PORT:OPEN_WEBUI_CONTAINER_PORT`. |
+| Pasarela (Compose de ejemplo) | publicado por el host | La app interna escucha en **4000** en el archivo de ejemplo; el mapeo del host varía. |
+| Servicio de agentes | `8642` (+ interno `4860`) | Puerto publicado para API opcional en Compose de ejemplo. |
 
-## Data volumes (patterns)
+## Volúmenes de datos (patrones)
 
-- **IdentiaRAG**: `./output`, `./docs`, HuggingFace cache volume in compose.
-- **Open-WebUI**: named volume on `/app/backend/data` in `dev-stack.sh` pattern.
-- **LiteLLM**: Postgres volume for model registry when DB mode is enabled.
+- **Servicio RAG**: `./output`, `./docs`, volumen de caché HuggingFace en Compose.
+- **Interfaz de chat**: volumen con nombre en `/app/backend/data` en el patrón `dev-stack.sh`.
+- **Pasarela**: volumen Postgres para registro de modelos si el modo DB está activo.
 
-Do **not** document secret values; only **variable names** appear in compose (e.g. `LITELLM_MASTER_KEY`, `DATABASE_URL` pattern).
+**No** documentes valores secretos; solo **nombres** de variables en Compose (p. ej. `LITELLM_MASTER_KEY`, patrón `DATABASE_URL`).

@@ -1,21 +1,21 @@
-# Contributing to `docu`
+# Contribuir al sitio de documentación
 
-## Security
+## Seguridad
 
-- Never commit API keys, tokens, `.env` files, private keys, or customer-specific hostnames/IP addresses.
-- Use placeholders in examples: `<gateway-host>`, `<user>@<host>`, etc.
-- The TdR PDF stays under `incoming/` (gitignored for `*.pdf`). The **full-text extract** `docs/tor-gap/_extracted/tdr-extract.txt` is also **gitignored**; regenerate with `python scripts/extract_tdr_pdf.py` after legal review of redistribution policy.
+- No versiones claves API, tokens, archivos `.env`, claves privadas ni nombres de host / IP propios de clientes.
+- Usa marcadores en ejemplos: `<host-pasarela>`, `<usuario>@<host>`, etc.
+- El PDF TdR va bajo `incoming/` (gitignored para `*.pdf`). El **extracto de texto** `docs/tor-gap/_extracted/tdr-extract.txt` también está **gitignored**; regenéralo con `python scripts/extract_tdr_pdf.py` tras revisar política legal de redistribución.
 
-## Git hooks
+## Hooks de Git
 
-After clone:
+Tras clonar:
 
 ```bash
 git config core.hooksPath .githooks
 chmod +x .githooks/commit-msg
 ```
 
-## Documentation builds
+## Builds de documentación
 
 ```bash
 python3 -m venv .venv
@@ -23,6 +23,6 @@ python3 -m venv .venv
 .venv/bin/mkdocs serve
 ```
 
-## Milestone cadence
+## Ritmo por hitos
 
-Batch substantive changes and push to `origin` when a roadmap milestone is complete. See `docs/PRIVATE-REPO-AND-PUSH.md`.
+Agrupa cambios sustantivos y haz push a `origin` cuando un hito del roadmap esté cerrado. Ver `docs/PRIVATE-REPO-AND-PUSH.md`.

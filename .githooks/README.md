@@ -1,17 +1,17 @@
-# Local Git hooks (this repository)
+# Hooks de Git locales (este repositorio)
 
-`commit-msg` removes an accidental `Made-with: Cursor` trailer line from the commit message before the commit is finalized, so it cannot re-enter public history.
+`commit-msg` elimina una línea accidental `Made-with: Cursor` del mensaje de commit antes de finalizar el commit, para que no entre en el historial público.
 
-## One-time setup (each clone)
+## Configuración única (por clone)
 
-From the repository root:
+Desde la raíz del repositorio:
 
 ```bash
 git config core.hooksPath .githooks
 chmod +x .githooks/commit-msg
 ```
 
-## Emergency: disable all hooks (rare)
+## Emergencia: desactivar todos los hooks (raro)
 
 ```bash
 git -c core.hooksPath=/dev/null commit ...

@@ -1,51 +1,51 @@
-# Hermes Agent
+# Servicio de agentes
 
-Hermes is a **separate** deployable from IdentiaRAG/Open-WebUI. It packages an agent runtime (including optional messaging channels such as WhatsApp) behind a container image published by the hosting provider stack.
+Es un desplegable **separado** del servicio RAG y de la interfaz web de chat. Empaqueta un runtime de agente (incluye canales de mensajería opcionales con proveedores de terceros) en una imagen de contenedor publicada por la pila del proveedor de alojamiento.
 
-## Compose pattern (observed)
+## Patrón Compose (observado)
 
-From a representative `docker-compose.yml` on the application server:
+De un `docker-compose.yml` representativo en el servidor de aplicaciones:
 
 ```yaml
-# Illustrative — do not copy secrets from real .env
+# Ilustrativo — no copiar secretos del .env real
 services:
   hermes-agent:
-    image: ghcr.io/hostinger/hvps-hermes-agent:latest
+    image: <registro>/<imagen-agente>:latest
     ports:
-      - "8642:8642"   # optional HTTP API surface
+      - "8642:8642"   # superficie HTTP API opcional
     env_file: [.env]
     volumes:
-      - ./hermes:/opt/hermes    # mount for upstream git / code updates
+      - ./hermes:/opt/hermes    # montaje para git / actualizaciones de código
       - ./data:/opt/data
 ```
 
-Reverse-proxy labels (e.g. Traefik on `4860`) may route the **main** HTTP UI; the **8642** mapping is commonly used for an API or health surface — confirm against your running container and `.env`.
+Las etiquetas de *reverse proxy* (p. ej. Traefik en `4860`) pueden enrutar la **UI** HTTP principal; el mapeo **8642** suele usarse para API o *health* — confirma con el contenedor en ejecución y `.env`.
 
 ```mermaid
 flowchart TB
-  subgraph HC["Hermes compose project"]
-    H["Hermes Agent container"]
-    data[("Host data volume")]
-    code["Host hermes bind mount"]
+  subgraph HC["Proyecto Compose del servicio de agentes"]
+    H["Contenedor del servicio de agentes"]
+    data[("Volumen de datos en el host")]
+    code["Montaje de código del agente en el host"]
     H --> data
     H --> code
   end
 
-  user["External users"] -->|"Messaging"| H
-  admin["Operators"] -->|"HTTP API or health"| H
+  user["Usuarios externos"] -->|"Mensajería"| H
+  admin["Operadores"] -->|"HTTP API o health"| H
 ```
 
-## Relationship to chat stack
+## Relación con la pila de chat
 
-- **Orthogonal** to Open-WebUI’s default OpenAI connection: Hermes does not replace LiteLLM unless you explicitly wire integrations.
-- Optional future pattern: route Hermes LLM calls through the same **gateway** for unified quotas and logging.
+- **Ortogonal** a la conexión OpenAI por defecto de la interfaz web de chat: el servicio de agentes **no** sustituye a la pasarela de inferencia salvo que cableéis integraciones explícitas.
+- Patrón futuro opcional: enrutar las llamadas LLM del servicio de agentes por la misma **pasarela** para cuotas y registro unificados.
 
-## Operations (high level)
+## Operaciones (alto nivel)
 
-- Mount `./hermes` to a git checkout of upstream Hermes when you need `git pull`-style updates inside the image layout.
-- Keep `.env` out of git; rotate API keys used by the agent independently from gateway keys.
+- Montar `./hermes` sobre un checkout git del código del agente cuando necesitéis actualizaciones tipo `git pull` dentro del layout de la imagen.
+- Mantener `.env` fuera de git; rotar las claves API del agente de forma independiente de las de la pasarela.
 
-## Related
+## Relacionado
 
-- [C4 — Containers](c4-containers.md) for port summary.
-- [Deployment patterns](deployment-patterns.md) for compose vs UI stack.
+- [C4 — Contenedores](c4-containers.md) para resumen de puertos.
+- [Patrones de despliegue](deployment-patterns.md) para Compose frente a la pila de UI.

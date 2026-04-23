@@ -1,72 +1,73 @@
-# docu
+# Documentación técnica (sitio MkDocs)
 
-Technical documentation for the IdentiaRAG + Open-WebUI + Hermes (+ gateway) stack, aligned with the as-built codebase and deployment.
+Documentación del stack **servicio RAG + interfaz web de chat + servicio de agentes + pasarela de inferencia**, alineada con el código *as-built* y el despliegue.
 
-- **Remote:** `https://github.com/13g4d0/docu` (expected to be **private**)
-- **Working copy:** clone to any machine your team uses for authoring; keep secrets and customer-specific paths out of tracked files.
+- **Remoto:** `https://github.com/13g4d0/docu-es` (**público** — documentación en español para GitHub Pages).
+- **Versión en inglés:** puede mantenerse en un repo aparte (p. ej. `13g4d0/docu`) con su propia URL de Pages.
+- **Copia de trabajo:** clonar en cualquier máquina; no versionar secretos ni rutas propias de clientes.
 
-## Layout (planned)
+## Estructura (prevista)
 
-| Path | Purpose |
-|------|---------|
-| `docs/as-built/` | System as implemented (C4, deployment, APIs, ops). |
-| `docs/tor-gap/` | TdR traceability, gap analysis, documentation roadmap (uses a local-only TdR PDF under `incoming/`). |
-| `incoming/` | Local-only inputs (e.g. TdR PDF). **Not committed** (see `.gitignore`). |
+| Ruta | Uso |
+|------|-----|
+| `docs/as-built/` | Sistema tal como está implementado (C4, despliegue, APIs, ops). |
+| `docs/tor-gap/` | Trazabilidad TdR, análisis de brechas, hoja de ruta documental (TdR PDF local bajo `incoming/`). |
+| `incoming/` | Entradas solo locales (p. ej. PDF TdR). **No versionado** (ver `.gitignore`). |
 
-## Documentation milestones
+## Hitos documentales
 
-See [`docs/ROADMAP-MILESTONES.md`](docs/ROADMAP-MILESTONES.md).
+Ver [`docs/ROADMAP-MILESTONES.md`](docs/ROADMAP-MILESTONES.md).
 
-## Related sources (internal)
+## Fuentes relacionadas (internas)
 
-Reference materials may live in sibling checkouts on the same host (paths differ per environment). Do **not** copy API keys, `.env` contents, or provider credentials into this repo.
+Los materiales de referencia pueden vivir en checkouts hermanos en el mismo host (las rutas varían). **No** copies claves API, contenido de `.env` ni credenciales de proveedor en este repo.
 
-## TdR PDF (local only)
+## PDF TdR (solo local)
 
-Place the Terms of Reference PDF under `incoming/` using **your** organisation’s approved transfer method (SFTP, secure share, etc.). Example shape only — replace placeholders:
+Coloca el PDF de los términos de referencia bajo `incoming/` con el método aprobado por tu organización (SFTP, enlace seguro, etc.). Ejemplo de forma (sustituye marcadores):
 
 ```bash
-scp <path-to-local>/tdr.pdf <user>@<host>:<path-to-repo>/incoming/tdr.pdf
+scp <ruta-local>/tdr.pdf <usuario>@<host>:<ruta-al-repo>/incoming/tdr.pdf
 ```
 
-Never commit keys, tokens, or production connection strings. The PDF stays **gitignored** unless you deliberately change `.gitignore` and policy.
+No versiones claves, tokens ni cadenas de conexión de producción. El PDF permanece **gitignored** salvo que cambiéis `.gitignore` y la política.
 
-## Git commit messages (no Cursor trailer)
+## Mensajes de commit (sin remolque de herramienta)
 
-This repo uses a local `commit-msg` hook under `.githooks/` that **strips** an accidental `Made-with: Cursor` line from commit messages (some environments inject it).
+Este repo usa un hook local `commit-msg` bajo `.githooks/` que **elimina** una línea accidental `Made-with: Cursor` del mensaje (algunos entornos la inyectan).
 
-**After clone** (once per working copy):
+**Tras clonar** (una vez por copia de trabajo):
 
 ```bash
 git config core.hooksPath .githooks
 chmod +x .githooks/commit-msg
 ```
 
-See [`.githooks/README.md`](.githooks/README.md). One-off bypass (only if you really need it): `git -c core.hooksPath=/dev/null commit …`
+Ver [`.githooks/README.md`](.githooks/README.md). Bypass puntual (solo si hace falta): `git -c core.hooksPath=/dev/null commit …`
 
-## Private repo & pushing (milestones)
+## Repo privado y push (hitos)
 
-See [`docs/PRIVATE-REPO-AND-PUSH.md`](docs/PRIVATE-REPO-AND-PUSH.md). Commits to `origin` are intended **once per documentation milestone**, not on every small edit.
+Ver [`docs/PRIVATE-REPO-AND-PUSH.md`](docs/PRIVATE-REPO-AND-PUSH.md). Los commits a `origin` están pensados **una vez por hito** documental, no en cada edición pequeña.
 
-## MkDocs site
+## Sitio MkDocs
 
-Use a **virtualenv** (PEP 668 on Debian/Ubuntu):
+Usa un **virtualenv** (PEP 668 en Debian/Ubuntu):
 
 ```bash
-cd /opt/documentation
+cd /opt/documentacion
 python3 -m venv .venv
 .venv/bin/pip install -r requirements-docs.txt
-.venv/bin/mkdocs serve    # local preview
-.venv/bin/mkdocs build    # static output in site/
+.venv/bin/mkdocs serve    # vista previa local
+.venv/bin/mkdocs build    # salida estática en site/
 ```
 
-Contributor rules: [CONTRIBUTING.md](CONTRIBUTING.md).
+Normas para colaboradores: [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## CI & GitHub Pages
+## CI y GitHub Pages
 
 GitHub Actions (`.github/workflows/docs.yml`):
 
-- **Pull requests:** `mkdocs build --strict` + artefact `site/`.
-- **Push to `main`:** same build, then deploy to **GitHub Pages** at **https://13g4d0.github.io/docu/** (enable **Settings → Pages → Source: GitHub Actions** once).
+- **Pull requests:** `mkdocs build --strict` + artefacto `site/`.
+- **Push a `main`:** mismo build y despliegue a **GitHub Pages** en **https://13g4d0.github.io/docu-es/** (activar **Settings → Pages → Source: GitHub Actions** una vez).
 
-Details: [docs/PUBLISHING.md](docs/PUBLISHING.md).
+Detalle: [docs/PUBLISHING.md](docs/PUBLISHING.md).

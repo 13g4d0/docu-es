@@ -1,22 +1,22 @@
-# Open-WebUI — HTTP routers (component view)
+# Interfaz web de chat — routers HTTP (vista por componentes)
 
-This page maps **FastAPI routers** registered in `backend/open_webui/main.py` (fork snapshot). Feature flags may omit some routers (e.g. SCIM, admin analytics).
+Mapa de **routers FastAPI** registrados en `backend/open_webui/main.py` (instantánea del fork). Los *feature flags* pueden omitir routers (p. ej. SCIM, analíticas admin).
 
-## Router diagram
+## Diagrama de routers
 
 ```mermaid
 flowchart TB
-  subgraph transport [Transport]
+  subgraph transport [Transporte]
     APP[FastAPI app]
     WS["/ws WebSocket"]
   end
 
-  subgraph integrations [Model runners]
+  subgraph integrations [Ejecutores de modelo]
     OLL["/ollama"]
     OAI["/openai"]
   end
 
-  subgraph api [Versioned REST /api/v1]
+  subgraph api [REST versionado /api/v1]
     PIP[pipelines]
     TSK[tasks]
     IMG[images]
@@ -76,45 +76,45 @@ flowchart TB
   APP --> SCM
 ```
 
-## Prefix table
+## Tabla de prefijos
 
-| Prefix | Purpose (summary) |
-|--------|---------------------|
-| `/ws` | Real-time / streaming channel (see `socket` package). |
-| `/ollama` | Ollama-compatible endpoints. |
-| `/openai` | OpenAI-compatible proxying and tool calls toward external gateways. |
-| `/api/v1/pipelines` | Pipeline plugins. |
-| `/api/v1/tasks` | Background tasks. |
-| `/api/v1/images` | Image generation / editing integrations. |
-| `/api/v1/audio` | STT/TTS routes. |
-| `/api/v1/retrieval` | RAG retrieval configuration and execution. |
-| `/api/v1/configs` | Runtime configuration. |
-| `/api/v1/auths` | Sign-in, tokens, OAuth. |
-| `/api/v1/users` | User profiles and admin operations. |
-| `/api/v1/channels` | Channel / workspace constructs. |
-| `/api/v1/chats` | Chat sessions and messages. |
-| `/api/v1/notes` | Notes feature. |
-| `/api/v1/models` | Model list and metadata. |
-| `/api/v1/knowledge` | Knowledge collections. |
-| `/api/v1/prompts` | Saved prompts. |
-| `/api/v1/tools` | Tool definitions. |
-| `/api/v1/skills` | Skills (structured tool bundles). |
-| `/api/v1/memories` | Long-term memory store. |
-| `/api/v1/folders` | Folder hierarchy for chats/files. |
-| `/api/v1/groups` | RBAC groups. |
-| `/api/v1/files` | Uploaded files. |
-| `/api/v1/functions` | Python functions exposed to models. |
-| `/api/v1/evaluations` | Evaluation flows. |
-| `/api/v1/analytics` | Admin analytics (optional flag). |
-| `/api/v1/utils` | Miscellaneous helpers. |
-| `/api/v1/terminals` | Web terminal integration. |
-| `/api/v1/scim/v2` | SCIM provisioning (optional flag). |
+| Prefijo | Propósito (resumen) |
+|---------|---------------------|
+| `/ws` | Canal en tiempo real / *streaming* (paquete `socket`). |
+| `/ollama` | Endpoints compatibles con el protocolo habitual del motor local (nombre de ruta histórico en código). |
+| `/openai` | Proxy compatible OpenAI y llamadas a herramientas hacia pasarelas externas. |
+| `/api/v1/pipelines` | Plugins de *pipeline*. |
+| `/api/v1/tasks` | Tareas en segundo plano. |
+| `/api/v1/images` | Integraciones de generación / edición de imágenes. |
+| `/api/v1/audio` | Rutas STT/TTS. |
+| `/api/v1/retrieval` | Configuración y ejecución de recuperación RAG. |
+| `/api/v1/configs` | Configuración en tiempo de ejecución. |
+| `/api/v1/auths` | Inicio de sesión, tokens, OAuth. |
+| `/api/v1/users` | Perfiles y operaciones admin. |
+| `/api/v1/channels` | Canales / espacios de trabajo. |
+| `/api/v1/chats` | Sesiones y mensajes. |
+| `/api/v1/notes` | Notas. |
+| `/api/v1/models` | Lista y metadatos de modelos. |
+| `/api/v1/knowledge` | Colecciones de conocimiento. |
+| `/api/v1/prompts` | Prompts guardados. |
+| `/api/v1/tools` | Definiciones de herramientas. |
+| `/api/v1/skills` | *Skills* (paquetes estructurados de herramientas). |
+| `/api/v1/memories` | Almacén de memoria a largo plazo. |
+| `/api/v1/folders` | Jerarquía de carpetas para chats/archivos. |
+| `/api/v1/groups` | Grupos RBAC. |
+| `/api/v1/files` | Archivos subidos. |
+| `/api/v1/functions` | Funciones Python expuestas a modelos. |
+| `/api/v1/evaluations` | Flujos de evaluación. |
+| `/api/v1/analytics` | Analíticas admin (*flag* opcional). |
+| `/api/v1/utils` | Utilidades varias. |
+| `/api/v1/terminals` | Integración de terminal web. |
+| `/api/v1/scim/v2` | Aprovisionamiento SCIM (*flag* opcional). |
 
-## SQLAlchemy models (`backend/open_webui/models/`)
+## Modelos SQLAlchemy (`backend/open_webui/models/`)
 
-Representative modules: `chats`, `chat_messages`, `users`, `auths`, `knowledge`, `files`, `groups`, `memories`, `tools`, `functions`, … — see [Data & storage](data-and-storage.md).
+Módulos representativos: `chats`, `chat_messages`, `users`, `auths`, `knowledge`, `files`, `groups`, `memories`, `tools`, `functions`, … — ver [Datos y almacenamiento](data-and-storage.md).
 
-## Related
+## Relacionado
 
-- [Open-WebUI — software](open-webui-software.md)
-- [Sequence diagrams](sequence-requests.md)
+- [Interfaz web de chat — software](open-webui-software.md)
+- [Secuencias de peticiones](sequence-requests.md)

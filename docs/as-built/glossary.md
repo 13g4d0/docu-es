@@ -1,15 +1,15 @@
-# Glossary
+# Glosario
 
-| Term | Meaning in this solution |
-|------|-------------------------|
-| **IdentiaRAG** | Python package and FastAPI application for multi-stage RAG (query expansion → embeddings → Vespa → LLM answer). Evolved from upstream **nyrag** naming in parts of the codebase. |
-| **Vespa** | Search engine used for hybrid / vector retrieval (`pyvespa`, ranking profiles). |
-| **Open-WebUI** | Self-hosted chat UI and API hub (fork). Frontend: SvelteKit; backend: FastAPI + SQLAlchemy + optional Redis. |
-| **LiteLLM** | OpenAI-compatible **gateway**: model aliases, routing, fallbacks, often backed by PostgreSQL when `STORE_MODEL_IN_DB` is enabled. |
-| **OpenRouter** | Cloud model aggregator; typical **fallback** upstream behind LiteLLM. |
-| **LM Studio** | Desktop inference runtime exposing an OpenAI-compatible `/v1` API on a configurable port. |
-| **LM Link** | LM Studio ecosystem features for remote operation; often paired with private network reachability. |
-| **Tailscale** | Mesh VPN providing stable private IPs (`100.64.0.0/10` range) between nodes (e.g. VPS ↔ workstation). |
-| **Hermes Agent** | Separate container image for agent / messaging integrations (e.g. WhatsApp); optional HTTP API alongside the main app port. |
-| **dev-stack.sh** | Bash orchestration in the IdentiaRAG repo for Open-WebUI Docker lifecycle and IdentiaRAG process control. |
-| **Logical model alias** | User-facing model name resolved by the gateway (e.g. `lm-auto`) to one or more upstream deployments plus fallback rules. |
+| Término | Significado en esta solución |
+|---------|------------------------------|
+| **Servicio RAG** | Paquete Python y aplicación FastAPI para RAG por etapas (expansión de consulta → embeddings → Vespa → respuesta LLM). En el código coexisten rutas heredadas del paquete histórico `nyrag`. |
+| **Vespa** | Motor de búsqueda híbrido / vectorial (`pyvespa`, perfiles de ranking). |
+| **Interfaz web de chat** | UI y hub API de chat autohospedados (fork). Frontend: SvelteKit; backend: FastAPI + SQLAlchemy + Redis opcional. |
+| **Pasarela de inferencia** | **Gateway** compatible OpenAI: alias de modelo, enrutado, *fallbacks*; a menudo respaldado por PostgreSQL si `STORE_MODEL_IN_DB` está activo. |
+| **Proveedor agregador en la nube** | API que concentra modelos de varios proveedores; suele usarse como **fallback** tras la pasarela. |
+| **Runtime local en escritorio** | Proceso en el PC que expone API compatible OpenAI (`/v1`) en un puerto configurable. |
+| **Enlace remoto al runtime local** | Funciones del ecosistema del runtime de escritorio para operación remota; a menudo junto a red privada alcanzable. |
+| **VPN en malla** | Red privada entre nodos con IPs estables en rango típico `100.64.0.0/10` (p. ej. estación ↔ VPS). |
+| **Servicio de agentes** | Imagen de contenedor aparte para integraciones de agente / canales de mensajería; API HTTP opcional además del puerto principal de la app. |
+| **`dev-stack.sh`** | Orquestación Bash en el repo del servicio RAG para el ciclo de vida Docker de la interfaz de chat y el control de procesos del servicio RAG. |
+| **Alias lógico de modelo** | Nombre de modelo visible para el usuario resuelto por la pasarela (p. ej. `lm-auto`) hacia uno o más despliegues *upstream* más reglas de *fallback*. |

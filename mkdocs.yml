@@ -1,11 +1,11 @@
-# MkDocs site — publish later to docs.<your-domain>
+# Sitio MkDocs — publicar después en docs.<tu-dominio>
 # Build: .venv/bin/pip install -r requirements-docs.txt && .venv/bin/mkdocs build
-# Preview: mkdocs serve -a 0.0.0.0:8000
+# Vista previa: mkdocs serve -a 0.0.0.0:8000
 
-site_name: Solution documentation
-site_description: As-built docs for IdentiaRAG, Open-WebUI, inference gateway, and Hermes Agent
-# GitHub Pages (project site): https://<user>.github.io/<repo>/
-site_url: https://13g4d0.github.io/docu/
+site_name: Documentación de la solución
+site_description: Documentación as-built del servicio RAG, la interfaz web de chat, la pasarela de inferencia y el servicio de agentes
+# GitHub Pages (sitio de proyecto, español): https://13g4d0.github.io/docu-es/
+site_url: https://13g4d0.github.io/docu-es/
 
 theme:
   name: material
@@ -14,19 +14,19 @@ theme:
       primary: indigo
       toggle:
         icon: material/brightness-7
-        name: Switch to dark mode
+        name: Cambiar a modo oscuro
     - scheme: slate
       primary: indigo
       toggle:
         icon: material/brightness-4
-        name: Switch to light mode
+        name: Cambiar a modo claro
   features:
     - navigation.tabs
     - navigation.sections
     - content.code.copy
 
 markdown_extensions:
-  # Native Mermaid in Material (do not use mkdocs-mermaid2 alongside — it conflicts)
+  # Mermaid nativo en Material (no usar mkdocs-mermaid2 a la vez: entra en conflicto)
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -40,47 +40,47 @@ markdown_extensions:
       permalink: true
 
 nav:
-  - Home: index.md
+  - Inicio: index.md
   - As-built:
-      - Glossary: as-built/glossary.md
-      - Repository map: as-built/repo-map.md
-      - C4 — System context: as-built/c4-context.md
-      - C4 — Containers: as-built/c4-containers.md
-      - IdentiaRAG (software): as-built/identiarag-software.md
-      - Open-WebUI (software): as-built/open-webui-software.md
-      - Open-WebUI routers: as-built/open-webui-routers.md
-      - Inference gateway: as-built/inference-gateway.md
-      - Hermes Agent: as-built/hermes-agent.md
-      - Data & storage: as-built/data-and-storage.md
-      - Network & security: as-built/network-security-matrix.md
-      - Deployment patterns: as-built/deployment-patterns.md
-      - Operations runbook: as-built/operations-runbook.md
-      - Observability: as-built/observability.md
-      - Request sequences: as-built/sequence-requests.md
-  - User guide:
-      - Open-WebUI basics: user-guide/open-webui-basics.md
-      - Models & gateway: user-guide/models-and-gateway.md
-      - IdentiaRAG for analysts: user-guide/identiarag-for-analysts.md
-  - Developer:
-      - Onboarding: developer/onboarding.md
-      - Fork & upstream policy: developer/fork-upstream-policy.md
-  - TdR & gap (M3):
-      - Hub: tor-gap/index.md
-      - TdR executive summary: tor-gap/tdr-executive-summary.md
-      - Criteria (dashboard snapshot): tor-gap/criteria-from-dashboard.md
-      - Gap workbook: tor-gap/gap-analysis-workbook.md
-      - Doc roadmap from gaps: tor-gap/documentation-roadmap-from-gaps.md
-      - Organizer notes: tor-gap/organizer-notes.md
+      - Glosario: as-built/glossary.md
+      - Mapa de repositorios: as-built/repo-map.md
+      - C4 — Contexto del sistema: as-built/c4-context.md
+      - C4 — Contenedores: as-built/c4-containers.md
+      - Servicio RAG (software): as-built/identiarag-software.md
+      - Interfaz web de chat (software): as-built/open-webui-software.md
+      - Routers HTTP de la interfaz de chat: as-built/open-webui-routers.md
+      - Pasarela de inferencia: as-built/inference-gateway.md
+      - Servicio de agentes: as-built/hermes-agent.md
+      - Datos y almacenamiento: as-built/data-and-storage.md
+      - Red y seguridad: as-built/network-security-matrix.md
+      - Patrones de despliegue: as-built/deployment-patterns.md
+      - Runbook operativo: as-built/operations-runbook.md
+      - Observabilidad: as-built/observability.md
+      - Secuencias de peticiones: as-built/sequence-requests.md
+  - Guía de usuario:
+      - Uso básico de la interfaz de chat: user-guide/open-webui-basics.md
+      - Modelos y pasarela: user-guide/models-and-gateway.md
+      - Servicio RAG para analistas: user-guide/identiarag-for-analysts.md
+  - Desarrollo:
+      - Incorporación: developer/onboarding.md
+      - Política de fork y upstream: developer/fork-upstream-policy.md
+  - TdR y brechas (M3):
+      - Índice: tor-gap/index.md
+      - Resumen ejecutivo TdR: tor-gap/tdr-executive-summary.md
+      - Criterios (instantánea del tablero): tor-gap/criteria-from-dashboard.md
+      - Cuaderno de brechas: tor-gap/gap-analysis-workbook.md
+      - Hoja de ruta documental desde brechas: tor-gap/documentation-roadmap-from-gaps.md
+      - Notas del organizador: tor-gap/organizer-notes.md
   - ADRs:
-      - Index: adr/README.md
+      - Índice: adr/README.md
       - ADR 0001 MkDocs: adr/0001-use-mkdocs-for-docu.md
-      - ADR 0002 Gateway: adr/0002-gateway-single-openai-entrypoint.md
-      - ADR 0003 Layout: adr/0003-identiarag-openwebui-sibling-layout.md
+      - ADR 0002 Pasarela: adr/0002-gateway-single-openai-entrypoint.md
+      - ADR 0003 Diseño de carpetas: adr/0003-identiarag-openwebui-sibling-layout.md
   - Meta:
-      - Publishing site: PUBLISHING.md
-      - Internal references: meta/internal-references.md
-      - Milestone roadmap: ROADMAP-MILESTONES.md
-      - Private repo & push: PRIVATE-REPO-AND-PUSH.md
+      - Publicar el sitio: PUBLISHING.md
+      - Referencias internas: meta/internal-references.md
+      - Hitos del roadmap: ROADMAP-MILESTONES.md
+      - Git y política de push: PRIVATE-REPO-AND-PUSH.md
 
 plugins:
   - search

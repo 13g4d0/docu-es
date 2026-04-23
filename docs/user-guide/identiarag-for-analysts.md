@@ -1,43 +1,43 @@
-# IdentiaRAG — analyst / operator basics
+# Servicio RAG — nociones para analistas / operadores
 
-For people who **run projects** or **review answers**, not necessarily developers.
+Para quienes **ejecutan proyectos** o **revisan respuestas**, no necesariamente desarrolladores.
 
-## What IdentiaRAG does
+## Qué hace el servicio RAG
 
-1. Ingests **websites** or **documents** according to a YAML config.
-2. Indexes chunks into **Vespa** for hybrid / vector search.
-3. At question time: expands queries, retrieves top chunks, and asks an **LLM** to answer **only from retrieved context**.
+1. Ingiere **sitios web** o **documentos** según un config YAML.
+2. Indexa fragmentos en **Vespa** para búsqueda híbrida / vectorial.
+3. En la pregunta: expande consultas, recupera los mejores fragmentos y pide a un **LLM** que responda **solo** con el contexto recuperado.
 
 ```mermaid
 flowchart TB
-  subgraph ingest [Ingestion]
-    SRC[Sources] --> IDX[Index in Vespa]
+  subgraph ingest [Ingesta]
+    SRC[Fuentes] --> IDX[Índice en Vespa]
   end
 
-  subgraph ask [Question answering]
-    Q[User question] --> R[Retrieve chunks]
-    R --> A[LLM answer grounded in chunks]
+  subgraph ask [Respuesta a preguntas]
+    Q[Pregunta] --> R[Recuperar fragmentos]
+    R --> A[Respuesta LLM anclada a fragmentos]
   end
 
   IDX --> R
 ```
 
-## Projects and settings
+## Proyectos y ajustes
 
-- Operators choose an **active project** in the UI; user settings persist under the server user’s home directory pattern described in [Data & storage](../as-built/data-and-storage.md).
-- Changing retrieval parameters (`hits`, `k`, etc.) affects recall vs precision — document your organisation’s recommended defaults.
+- Los operadores eligen un **proyecto activo** en la UI; los ajustes persisten según el patrón de directorio de inicio descrito en [Datos y almacenamiento](../as-built/data-and-storage.md).
+- Cambiar parámetros de recuperación (`hits`, `k`, etc.) afecta *recall* vs precisión — documenta los valores recomendados por tu organización.
 
-## When answers look wrong
+## Cuando las respuestas fallan
 
-| Symptom | Check |
-|---------|--------|
-| “I don’t see my document” | Ingestion job completed? Correct project selected? |
-| Answer ignores new content | Re-index after source changes. |
-| Empty retrieval | Vespa health; embedding model availability; credentials for Vespa Cloud if used. |
+| Síntoma | Comprobar |
+|---------|-----------|
+| «No veo mi documento» | ¿Terminó el trabajo de ingesta? ¿Proyecto correcto seleccionado? |
+| La respuesta ignora contenido nuevo | Reindexar tras cambios en fuentes. |
+| Recuperación vacía | Salud de Vespa; disponibilidad del modelo de embeddings; credenciales para Vespa Cloud si aplica. |
 
-Escalate to developers with **timestamps** and **project id**, not with API keys.
+Escala a desarrollo con **marcas de tiempo** e **id de proyecto**, no con claves API.
 
-## Related
+## Relacionado
 
-- [IdentiaRAG — software](../as-built/identiarag-software.md)
-- [Operations runbook](../as-built/operations-runbook.md)
+- [Servicio RAG — software](../as-built/identiarag-software.md)
+- [Runbook operativo](../as-built/operations-runbook.md)

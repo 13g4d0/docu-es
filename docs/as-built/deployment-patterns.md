@@ -1,26 +1,26 @@
-# Deployment patterns
+# Patrones de despliegue
 
-## Pattern A — IdentiaRAG + Vespa via Docker Compose
+## Patrón A — Servicio RAG + Vespa vía Docker Compose
 
-Use `compose.yml` at the IdentiaRAG repository root:
+Usa `compose.yml` en la raíz del repositorio del servicio RAG:
 
 ```bash
 docker compose up -d
 ```
 
-Brings up **Vespa**, the **IdentiaRAG UI** image build, and optionally **agent-embed** with LiveKit-related env vars.
+Levanta **Vespa**, el build de imagen **UI del servicio RAG** y opcionalmente **agent-embed** con variables de entorno relacionadas con voz en tiempo real (*LiveKit*).
 
-## Pattern B — Open-WebUI via `dev-stack.sh`
+## Patrón B — Interfaz web de chat vía `dev-stack.sh`
 
-The IdentiaRAG repo ships `dev-stack.sh`:
+El repo del servicio RAG incluye `dev-stack.sh`:
 
-| Command | Effect |
+| Comando | Efecto |
 |---------|--------|
-| `./dev-stack.sh deploy-webui` | Rebuild Open-WebUI image from `OPEN_WEBUI_ROOT` and run container with published port. |
-| `./dev-stack.sh up` | Start Open-WebUI and IdentiaRAG background mode (see script for exact behaviour). |
-| `./dev-stack.sh health` | Health probes for the stack. |
+| `./dev-stack.sh deploy-webui` | Reconstruye la imagen de la interfaz desde `OPEN_WEBUI_ROOT` y arranca el contenedor con puerto publicado. |
+| `./dev-stack.sh up` | Arranca la interfaz y el servicio RAG en modo segundo plano (ver el script para el comportamiento exacto). |
+| `./dev-stack.sh health` | *Health probes* de la pila. |
 
-Environment variables such as `OPEN_WEBUI_IMAGE`, `OPEN_WEBUI_HOST_PORT`, and `OPEN_WEBUI_ROOT` tune paths without editing the script.
+Variables como `OPEN_WEBUI_IMAGE`, `OPEN_WEBUI_HOST_PORT` y `OPEN_WEBUI_ROOT` ajustan rutas sin editar el script.
 
 ```mermaid
 stateDiagram-v2
@@ -31,18 +31,18 @@ stateDiagram-v2
   Running --> Stopped: down
 ```
 
-## Pattern C — Independent gateway and agent stacks
+## Patrón C — Pasarela y agentes en stacks independientes
 
-LiteLLM + Postgres and Hermes often live in **separate** compose directories on the host, managed by the provider UI or manual `docker compose`. They share the network namespace **only if** you attach them to the same user-defined bridge — otherwise they communicate via published ports on `localhost` or via reverse proxy.
+La **pasarela** + Postgres y el **servicio de agentes** suelen vivir en **directorios Compose aparte** en el host, gestionados por la UI del proveedor o `docker compose` manual. Comparten *network namespace* **solo si** los unes al mismo bridge definido por el usuario; si no, hablan por puertos publicados en `localhost` o vía *reverse proxy*.
 
-!!! warning "Secret handling"
-    Use `.env` files ignored by git or a secret manager. Never commit `LITELLM_MASTER_KEY`, database passwords, or provider tokens.
+!!! warning "Manejo de secretos"
+    Usa `.env` ignorado por git o un gestor de secretos. No versiones `LITELLM_MASTER_KEY`, contraseñas de base ni tokens de proveedor.
 
-## Pattern D — Documentation site (this repo)
+## Patrón D — Sitio de documentación (este repo)
 
 ```bash
 pip install -r requirements-docs.txt
 mkdocs build
 ```
 
-Output: static site under `site/` suitable for upload to `docs.<your-domain>`.
+Salida: sitio estático bajo `site/` listo para subir a `docs.<tu-dominio>`.

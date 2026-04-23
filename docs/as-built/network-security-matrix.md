@@ -1,38 +1,38 @@
-# Network & security matrix
+# Red y matriz de seguridad
 
-Logical flows only. Replace interface names and CIDRs with your organisation’s standards.
+Solo flujos **lógicos**. Sustituye nombres de interfaz y CIDR por los estándares de tu organización.
 
-## Caller → callee matrix
+## Matriz llamador → llamado
 
 ```mermaid
 flowchart TB
-  subgraph clients [Clients]
-    BR[Browser]
+  subgraph clients [Clientes]
+    BR[Navegador]
   end
 
-  subgraph edge [Edge]
+  subgraph edge [Borde]
     RP[Reverse proxy / TLS]
   end
 
-  subgraph apps [Application tier]
-    OW[Open-WebUI]
-    IR[IdentiaRAG]
-    GW[Inference gateway]
+  subgraph apps [Capa de aplicación]
+    OW[Interfaz web de chat]
+    IR[Servicio RAG]
+    GW[Pasarela de inferencia]
   end
 
-  subgraph data [Data tier]
+  subgraph data [Capa de datos]
     V[Vespa]
     PG[(Postgres)]
-    RD[(Redis optional)]
+    RD[(Redis opcional)]
   end
 
-  subgraph mesh [Private mesh]
-    TS[Tailscale / equivalent]
+  subgraph mesh [Malla privada]
+    TS[VPN en malla]
   end
 
-  subgraph ext [External APIs]
-    CL[Cloud LLM providers]
-    LOC[Workstation inference]
+  subgraph ext [APIs externas]
+    CL[Proveedores LLM en la nube]
+    LOC[Inferencia en estación]
   end
 
   BR --> RP --> OW
@@ -47,24 +47,24 @@ flowchart TB
   GW --> PG
 ```
 
-## Port classes
+## Clases de puerto
 
-| Class | Examples | Hardening |
-|-------|----------|-----------|
-| **Public HTTPS** | Reverse proxy → Open-WebUI / IdentiaRAG | TLS 1.2+, WAF optional, auth required. |
-| **Internal only** | Gateway ↔ Postgres, Open-WebUI ↔ Redis | Bind to loopback or private Docker network; no WAN exposure. |
-| **Mesh-only** | Gateway → workstation inference | ACL on mesh; inference process must not trust the public Internet. |
-| **Provider egress** | Gateway → OpenRouter / OpenAI | Outbound allowlist; per-key quotas. |
+| Clase | Ejemplos | Endurecimiento |
+|-------|----------|----------------|
+| **HTTPS público** | *Reverse proxy* → interfaz / servicio RAG | TLS 1.2+, WAF opcional, autenticación obligatoria. |
+| **Solo interno** | Pasarela ↔ Postgres, interfaz ↔ Redis | Enlazar a loopback o red Docker privada; sin exposición WAN. |
+| **Solo malla** | Pasarela → inferencia en estación | ACL en la malla; el proceso de inferencia no debe confiar en Internet público. |
+| **Egreso a proveedor** | Pasarela → API agregadora / OpenAI | Lista blanca saliente; cuotas por clave. |
 
-## Secrets (policy)
+## Secretos (política)
 
-| Secret type | Store in | Never |
-|-------------|----------|-------|
-| Gateway master key | Secret manager / `.env` on server | Commit to git, paste in docs. |
-| Provider API keys | Gateway env or vault | Send to browser clients except via server-side proxy. |
-| DB passwords | Compose env / vault | Log in plain text. |
+| Tipo de secreto | Dónde guardarlo | Nunca |
+|-----------------|-----------------|-------|
+| Clave maestra de pasarela | Gestor de secretos / `.env` en servidor | En git, pegado en docs. |
+| Claves API de proveedor | Entorno de pasarela o *vault* | En clientes de navegador salvo por proxy servidor. |
+| Contraseñas DB | Compose env / *vault* | En logs en claro. |
 
-## Related
+## Relacionado
 
-- [Inference gateway](inference-gateway.md)
-- [Operations runbook](operations-runbook.md)
+- [Pasarela de inferencia](inference-gateway.md)
+- [Runbook operativo](operations-runbook.md)

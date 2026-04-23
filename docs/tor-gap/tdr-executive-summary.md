@@ -1,51 +1,51 @@
-# TdR — executive summary (M3.1)
+# TdR — resumen ejecutivo (M3.1)
 
-Synthesised from the PDF extract (`incoming/tdr.pdf` → `scripts/extract_tdr_pdf.py`) and the dashboard masthead. **Not** a substitute for legal review of the official document.
+Síntesis a partir del extracto del PDF (`incoming/tdr.pdf` → `scripts/extract_tdr_pdf.py`) y el encabezado del tablero. **No** sustituye la revisión legal del documento oficial.
 
-## Programme identity (extract)
+## Identidad del programa (extracto)
 
-| Field | Value (from document) |
-|-------|------------------------|
-| Programme | MAP–BID — *Programa de Mejora a la Eficiencia del Servicio Civil de la República Dominicana* |
-| Reference | DR-L1142 (loan / programme context in TdR text) |
-| Component | Component 2 — optimisation of MAP infrastructure & technology solutions |
-| Subject | **TdR** — *Plataforma IA Jurídica Institucional* |
-| Contract modality | **BOT** (Build–Operate–Transfer) |
-| Document dates | March / April 2026 (cover pages vary) |
+| Campo | Valor (del documento) |
+|-------|-------------------------|
+| Programa | MAP–BID — *Programa de Mejora a la Eficiencia del Servicio Civil de la República Dominicana* |
+| Referencia | DR-L1142 (contexto de préstamo / programa en el texto del TdR) |
+| Componente | Componente 2 — optimización de infraestructura y soluciones tecnológicas MAP |
+| Asunto | **TdR** — *Plataforma IA Jurídica Institucional* |
+| Modalidad contractual | **BOT** (Build–Operate–Transfer) |
+| Fechas del documento | Marzo / abril de 2026 (las portadas pueden variar) |
 
-## Objectives (high level)
+## Objetivos (alto nivel)
 
-1. **Knowledge base** — Enable institutional legal knowledge (laws, regulations, manuals, etc.) for the public employment framework, initial period noted in TdR (e.g. first **3 months** for certain milestones).
-2. **Agentic assistant** — Expert agent that researches, drafts, and audits drafts (resolution-style work) within a similar early window.
-3. **Usage quota** — Provide at least **5,000** conversational RAG queries **per month** for a period of **18 months** (12+6) as stated in the extract.
-4. **Operate & maintain** — Run the intelligent platform for **18 months** after go-live.
-5. **Exit plan** — Detailed exit plan so MAP can migrate to another provider without loss of information or vendor lock-in (deadline tied to month **21** in extract).
+1. **Base de conocimiento** — Poner a disposición conocimiento jurídico institucional (leyes, reglamentos, manuales, etc.) para el marco de empleo público; periodo inicial citado en el TdR (p. ej. primeros **3 meses** para ciertos hitos).
+2. **Asistente con agentes** — Agente experto que investiga, redacta y revisa borradores (trabajo tipo resolución) en una ventana inicial similar.
+3. **Cuota de uso** — Al menos **5.000** consultas RAG conversacionales **al mes** durante **18 meses** (12+6) según el extracto.
+4. **Operar y mantener** — Ejecutar la plataforma inteligente **18 meses** tras el *go-live*.
+5. **Plan de salida** — Plan detallado para que MAP migre a otro proveedor sin pérdida de información ni *vendor lock-in* (plazo ligado al mes **21** en el extracto).
 
-## Procurement context (dashboard)
+## Contexto de contratación (tablero)
 
-The gap dashboard (`dashboard.html`) states (verify against your official copy):
+El tablero de brechas (`dashboard.html`) indica (verificar contra vuestra copia oficial):
 
 - **Expediente:** DR-L1142-P00100 · SBC  
-- **Envelope:** **USD 200,000** · **24 months** · BOT modality  
-- **Pre-technical-test threshold:** **63 / 90** points (70%) on experience + methodology + personnel groupings  
-- **EOI deadline (as coded in dashboard):** 28 April 2026  
+- **Sobre:** **USD 200.000** · **24 meses** · modalidad BOT  
+- **Umbral pre–prueba técnica:** **63 / 90** puntos (70 %) en experiencia + metodología + personal  
+- **Fecha límite EOI (codificada en tablero):** 28 de abril de 2026  
 
-If any field differs in your final tender notice, update **both** the dashboard constants and this summary.
+Si algún campo difiere en el pliego final, actualiza **tanto** las constantes del tablero como este resumen.
 
-## Scope keywords (extract)
+## Palabras clave de alcance (extracto)
 
-- Cloud-hosted **legal AI platform** with **web UI** and **conversational assistant** using **RAG**.  
-- **Digital agents** for investigate → draft → audit workflows.  
-- Emphasis on **normative systematication** for public employment law.  
-- Later sections of the TdR (see extract) cover **DPA**, **model versioning**, **technical test**, **users**, **deliverables**, and **minimum team**.
+- Plataforma de **IA jurídica** alojada en la nube con **UI web** y **asistente conversacional** usando **RAG**.  
+- **Agentes digitales** para flujos investigar → redactar → auditar.  
+- Énfasis en **sistematización normativa** del derecho del empleo público.  
+- Secciones posteriores del TdR (ver extracto) cubren **DPA**, **versionado de modelos**, **prueba técnica**, **usuarios**, **entregables** y **equipo mínimo**.
 
-## Where to go next
+## Próximos pasos
 
-1. Regenerate `docs/tor-gap/_extracted/tdr-extract.txt` whenever the PDF changes.  
-2. Fill [Gap analysis workbook](gap-analysis-workbook.md).  
-3. Keep scoring evidence in the dashboard UI or export Markdown/CSV from the dashboard buttons.
+1. Regenerar `docs/tor-gap/_extracted/tdr-extract.txt` cuando cambie el PDF.  
+2. Rellenar [Cuaderno de análisis de brechas](gap-analysis-workbook.md).  
+3. Mantener evidencias de puntuación en la UI del tablero o exportar Markdown/CSV desde sus botones.
 
-## Related
+## Relacionado
 
-- [Criteria from dashboard](criteria-from-dashboard.md)  
-- [Tor-gap hub](index.md)
+- [Criterios desde el tablero](criteria-from-dashboard.md)  
+- [Índice TdR y brechas](index.md)
