@@ -47,3 +47,17 @@ See [`.githooks/README.md`](.githooks/README.md). One-off bypass (only if you re
 ## Private repo & pushing (milestones)
 
 See [`docs/PRIVATE-REPO-AND-PUSH.md`](docs/PRIVATE-REPO-AND-PUSH.md). Commits to `origin` are intended **once per documentation milestone**, not on every small edit.
+
+## MkDocs site
+
+Use a **virtualenv** (PEP 668 on Debian/Ubuntu):
+
+```bash
+cd /opt/documentation
+python3 -m venv .venv
+.venv/bin/pip install -r requirements-docs.txt
+.venv/bin/mkdocs serve    # local preview
+.venv/bin/mkdocs build    # static output in site/
+```
+
+Contributor rules: [CONTRIBUTING.md](CONTRIBUTING.md).

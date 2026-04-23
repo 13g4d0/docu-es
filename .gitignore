@@ -4,3 +4,9 @@ incoming/*.PDF
 *.pem
 .env
 .env.*
+
+# MkDocs output
+/site/
+
+# Python venv for doc builds
+.venv/

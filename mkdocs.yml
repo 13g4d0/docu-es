@@ -1,0 +1,55 @@
+# MkDocs site — publish later to docs.<your-domain>
+# Build: pip install -r requirements-docs.txt && mkdocs build
+# Preview: mkdocs serve -a 0.0.0.0:8000
+
+site_name: Solution documentation
+site_description: As-built docs for IdentiaRAG, Open-WebUI, inference gateway, and Hermes Agent
+# site_url: https://docs.example.com   # set when publishing
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - admonition
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - As-built:
+      - Glossary: as-built/glossary.md
+      - Repository map: as-built/repo-map.md
+      - C4 — System context: as-built/c4-context.md
+      - C4 — Containers: as-built/c4-containers.md
+      - IdentiaRAG (software): as-built/identiarag-software.md
+      - Open-WebUI (software): as-built/open-webui-software.md
+      - Inference gateway: as-built/inference-gateway.md
+      - Hermes Agent: as-built/hermes-agent.md
+      - Deployment patterns: as-built/deployment-patterns.md
+      - Request sequences: as-built/sequence-requests.md
+  - Meta:
+      - Milestone roadmap: ROADMAP-MILESTONES.md
+      - Private repo & push: PRIVATE-REPO-AND-PUSH.md
+
+plugins:
+  - search
+  - mermaid2
