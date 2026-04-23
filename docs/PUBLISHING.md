@@ -16,6 +16,19 @@ With repository `13g4d0/docu`, the site is served at:
 2. Under **Build and deployment** → **Source**, choose **GitHub Actions** (not “Deploy from a branch” unless you switch workflows later).  
 3. Save. After the first successful run on `main`, the site URL appears in **Pages** and in the workflow job **deploy** output.
 
+### Si solo ves el `README.md` (texto plano, sin menú Material)
+
+Eso casi siempre significa que Pages está sirviendo la **raíz del repo** (o la carpeta `/docs` con Jekyll), **no** el artefacto `site/` del workflow.
+
+1. **Settings → Pages → Source** debe ser **GitHub Actions**, no *Deploy from a branch*.  
+2. Si antes elegiste **Branch: `main` / folder: `/ (root)`** o **`/docs`**, cámbialo a **GitHub Actions** y guarda.  
+3. En **Actions**, espera a que terminen en verde **`docs`** y **`pages build and deployment`**.  
+4. Abre de nuevo **https://13g4d0.github.io/docu/** (mejor recarga forzada **Ctrl+F5**).
+
+El sitio MkDocs correcto tiene **barra superior con pestañas** (Home, As-built, …) y **menú lateral**; la portada es **“Solution documentation”**, no el título del README `# docu`.
+
+El workflow **copia `.nojekyll` a `site/`** tras `mkdocs build` para que, si Pages mezclara Jekyll, no procese los HTML estáticos.
+
 The workflow file is `.github/workflows/docs.yml`: on every **push** to `main` it runs `mkdocs build --strict`, then **upload-pages-artifact** + **deploy-pages**.
 
 ### Private repository note
