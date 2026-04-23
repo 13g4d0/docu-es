@@ -4,7 +4,8 @@
 
 site_name: Solution documentation
 site_description: As-built docs for IdentiaRAG, Open-WebUI, inference gateway, and Hermes Agent
-# site_url: https://docs.example.com   # set when publishing
+# GitHub Pages (project site): https://<user>.github.io/<repo>/
+site_url: https://13g4d0.github.io/docu/
 
 theme:
   name: material

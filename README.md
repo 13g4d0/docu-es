@@ -62,8 +62,11 @@ python3 -m venv .venv
 
 Contributor rules: [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## CI
+## CI & GitHub Pages
 
-GitHub Actions builds the site with `mkdocs build --strict` on pushes and PRs to `main` (see `.github/workflows/docs.yml`). Artefact: `site/` zip per run.
+GitHub Actions (`.github/workflows/docs.yml`):
 
-Publishing steps: [docs/PUBLISHING.md](docs/PUBLISHING.md).
+- **Pull requests:** `mkdocs build --strict` + artefact `site/`.
+- **Push to `main`:** same build, then deploy to **GitHub Pages** at **https://13g4d0.github.io/docu/** (enable **Settings → Pages → Source: GitHub Actions** once).
+
+Details: [docs/PUBLISHING.md](docs/PUBLISHING.md).

@@ -51,7 +51,7 @@ Suggested order. Treat each milestone as a shippable slice (PR-sized where possi
 | ID | Milestone | Status |
 |----|-----------|--------|
 | M4.1 | Static site generator + theme + navigation. | **Done** (same as M0.1). |
-| M4.2 | CI: build + link check; optional deploy to `docs` subdomain. | **Partial** — `.github/workflows/docs.yml` builds on push/PR; deploy & link check TODO. |
+| M4.2 | CI: build + link check; optional deploy to `docs` subdomain. | **Done (GitHub)** — workflow builds on PR; **deploy-pages** on `main` → `https://13g4d0.github.io/docu/`. Link check still optional. |
 | M4.3 | Versioning policy (per release vs date-stamped). | **Todo** |
 
 ## Phase 5 — Debt & maintenance

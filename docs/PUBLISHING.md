@@ -1,41 +1,53 @@
-# Publishing `docs.<your-domain>` (Phase 4)
+# Publishing the documentation site
 
-MkDocs emits static files under `site/`. Host them on any static file host (NGINX, S3+CloudFront, GitHub Pages, Cloudflare Pages, etc.).
+MkDocs writes static HTML to `site/`. This repo is set up for **GitHub Pages** using **GitHub Actions** (no S3/buckets).
 
-## Build artefact
+## GitHub Pages (default URL)
+
+With repository `13g4d0/docu`, the site is served at:
+
+**https://13g4d0.github.io/docu/**
+
+`site_url` in `mkdocs.yml` matches that base so links and search behave correctly.
+
+### One-time setup in GitHub (UI)
+
+1. Open the repo on GitHub → **Settings** → **Pages**.  
+2. Under **Build and deployment** → **Source**, choose **GitHub Actions** (not “Deploy from a branch” unless you switch workflows later).  
+3. Save. After the first successful run on `main`, the site URL appears in **Pages** and in the workflow job **deploy** output.
+
+The workflow file is `.github/workflows/docs.yml`: on every **push** to `main` it runs `mkdocs build --strict`, then **upload-pages-artifact** + **deploy-pages**.
+
+### Private repository note
+
+Visibility of a **private** repo’s GitHub Pages site depends on your GitHub plan and product (e.g. Enterprise). Confirm in [GitHub Docs — GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) who can view the published site. If the site must be internal-only, consider Enterprise or an alternative host with SSO.
+
+## Local build
 
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements-docs.txt
-.venv/bin/mkdocs build
+.venv/bin/mkdocs build --strict
 # output: ./site/
 ```
 
-## Recommended checks before go-live
+## Pull requests
 
-| Check | Command / action |
-|-------|------------------|
-| Internal links | `mkdocs build` already fails on some broken refs; optionally add `lychee` or `markdown-link-check` in CI. |
-| Search scope | Large gitignored files are excluded; do not copy `incoming/*.pdf` into `site/`. |
-| Access control | If the TdR extract is ever copied into `docs/`, keep the site **private** or behind SSO. |
+Every **pull request** against `main` runs the **build** job only (no deploy), so broken links or strict MkDocs errors fail CI before merge.
 
-## DNS
+## Custom domain later (optional)
 
-1. Create hostname `docs.example.com` (replace with your domain).  
-2. Point CNAME/A record to the static host.  
-3. Configure TLS at the edge (Let’s Encrypt, managed cert, etc.).
+1. Add DNS: **CNAME** `docs` → `<user>.github.io` (or **A** / **AAAA** records per GitHub Pages custom domain docs).  
+2. In **Settings → Pages**, set **Custom domain** (e.g. `docs.example.com`).  
+3. Update `site_url` in `mkdocs.yml` to that HTTPS URL and redeploy.
 
-## `site_url` in MkDocs
+## Safety checklist
 
-Uncomment and set in `mkdocs.yml`:
-
-```yaml
-site_url: https://docs.example.com
-```
-
-This fixes canonical URLs and OpenGraph when you enable social cards later.
+| Check | Why |
+|-------|-----|
+| Do not publish `incoming/*.pdf` or `_extracted/` | Legal / confidentiality. |
+| Keep repo access aligned with who may read Pages | Especially for private repos. |
 
 ## Related
 
-- [Private repo & push](PRIVATE-REPO-AND-PUSH.md)  
-- CI workflow: repository file `.github/workflows/docs.yml` (build on every push to `main`).
+- [Private repo & push](PRIVATE-REPO-AND-PUSH.md)
