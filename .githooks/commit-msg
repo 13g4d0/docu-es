@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+# Strip "Made-with: Cursor" trailer if the environment injects it (keeps history clean).
+msg_file="${1:?}"
+test -f "$msg_file" || exit 0
+
+python3 - "$msg_file" <<'PY' || exit 0
+import sys
+path = sys.argv[1]
+with open(path, "r", encoding="utf-8", errors="replace") as f:
+    lines = f.readlines()
+filtered = [ln for ln in lines if ln.strip().casefold() != "made-with: cursor".casefold()]
+with open(path, "w", encoding="utf-8", newline="") as f:
+    f.writelines(filtered)
+PY
+
+exit 0

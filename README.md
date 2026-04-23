@@ -29,3 +29,16 @@ Place the Terms of Reference PDF on the server (already typical path):
 `scp /path/to/tdr.pdf root@31.97.145.146:/opt/documentation/incoming/tdr.pdf`
 
 It stays out of git for this **public** repo unless you explicitly choose to publish it.
+
+## Git commit messages (no Cursor trailer)
+
+This repo uses a local `commit-msg` hook under `.githooks/` that **strips** an accidental `Made-with: Cursor` line from commit messages (some environments inject it). That keeps `main` history readable on GitHub.
+
+**After clone** (once per working copy):
+
+```bash
+git config core.hooksPath .githooks
+chmod +x .githooks/commit-msg
+```
+
+See [`.githooks/README.md`](.githooks/README.md). One-off bypass (only if you really need it): `git -c core.hooksPath=/dev/null commit …`
