@@ -20,8 +20,15 @@ Documentation is written for a **private** GitHub repository. **Do not** embed A
 | [Open-WebUI](as-built/open-webui-software.md) | Full-stack | Monolith structure, extension points. |
 | [Inference gateway](as-built/inference-gateway.md) | Platform | Hybrid local + cloud model routing. |
 | [Hermes Agent](as-built/hermes-agent.md) | Integrations | Agent container, API surface (high level). |
+| [Open-WebUI routers](as-built/open-webui-routers.md) | Backend | FastAPI prefix map. |
+| [Data & storage](as-built/data-and-storage.md) | Backend / DBA | DBs, volumes, backup priorities. |
+| [Network & security](as-built/network-security-matrix.md) | Security | Flow matrix and port classes. |
 | [Deployment patterns](as-built/deployment-patterns.md) | DevOps | Compose vs `docker run`, env patterns. |
+| [Operations runbook](as-built/operations-runbook.md) | DevOps | `ops.sh` / compose operations. |
+| [Observability](as-built/observability.md) | DevOps | Healthchecks, logs, known gaps. |
 | [Request sequences](as-built/sequence-requests.md) | All | End-to-end Mermaid sequences. |
+| [ADRs](adr/README.md) | Architects | Accepted decisions. |
+| [Internal references](meta/internal-references.md) | Staff | Pointers to devops dashboard (no secrets). |
 
 ## Milestones
 

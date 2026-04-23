@@ -1,5 +1,5 @@
 # MkDocs site — publish later to docs.<your-domain>
-# Build: pip install -r requirements-docs.txt && mkdocs build
+# Build: .venv/bin/pip install -r requirements-docs.txt && .venv/bin/mkdocs build
 # Preview: mkdocs serve -a 0.0.0.0:8000
 
 site_name: Solution documentation
@@ -42,11 +42,22 @@ nav:
       - C4 — Containers: as-built/c4-containers.md
       - IdentiaRAG (software): as-built/identiarag-software.md
       - Open-WebUI (software): as-built/open-webui-software.md
+      - Open-WebUI routers: as-built/open-webui-routers.md
       - Inference gateway: as-built/inference-gateway.md
       - Hermes Agent: as-built/hermes-agent.md
+      - Data & storage: as-built/data-and-storage.md
+      - Network & security: as-built/network-security-matrix.md
       - Deployment patterns: as-built/deployment-patterns.md
+      - Operations runbook: as-built/operations-runbook.md
+      - Observability: as-built/observability.md
       - Request sequences: as-built/sequence-requests.md
+  - ADRs:
+      - Index: adr/README.md
+      - ADR 0001 MkDocs: adr/0001-use-mkdocs-for-docu.md
+      - ADR 0002 Gateway: adr/0002-gateway-single-openai-entrypoint.md
+      - ADR 0003 Layout: adr/0003-identiarag-openwebui-sibling-layout.md
   - Meta:
+      - Internal references: meta/internal-references.md
       - Milestone roadmap: ROADMAP-MILESTONES.md
       - Private repo & push: PRIVATE-REPO-AND-PUSH.md
 

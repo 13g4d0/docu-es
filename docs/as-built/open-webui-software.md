@@ -58,5 +58,6 @@ Track deliberate differences from upstream (themes, branding, patches) in your o
 
 ## Related
 
+- [Open-WebUI routers](open-webui-routers.md) for the FastAPI route map.
 - [Inference gateway](inference-gateway.md) for LiteLLM-centric routing.
 - [Deployment patterns](deployment-patterns.md) for image build and `docker run` flags.
