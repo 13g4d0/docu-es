@@ -2,7 +2,7 @@
 
 Suggested order. Treat each milestone as a shippable slice (PR-sized where possible).
 
-**Status (rolling):** Phases **0–2** complete; **Phase 3** scaffolded (TdR summary, dashboard criteria snapshot, gap workbook, PDF extract script; full text extract remains **local/gitignored**).
+**Status (rolling):** Phase **3** largely complete (M3.4 doc backlog page added); Phase **4** CI build added — deploy + versioning policy still open.
 
 ## Phase 0 — Bootstrap
 
@@ -43,16 +43,16 @@ Suggested order. Treat each milestone as a shippable slice (PR-sized where possi
 | M3.1 | TdR executive summary (requirements & scope cited from `incoming/tdr.pdf`). | **Done** — `tor-gap/tdr-executive-summary.md` + extract script. |
 | M3.2 | **TdR ↔ implementation** matrix (full / partial / missing / N/A). | **Template** — `tor-gap/gap-analysis-workbook.md` (fill per criterion). |
 | M3.3 | **Technical gap report** (risk, effort, dependencies). | **Template** — section 2 in workbook. |
-| M3.4 | **Documentation roadmap** derived from gaps (what to write next). | **Todo** — promote findings into new `docu` pages after workshop. |
+| M3.4 | **Documentation roadmap** derived from gaps (what to write next). | **Done** — `tor-gap/documentation-roadmap-from-gaps.md` (starter matrix; fill after workshop). |
 | M3.5 | Alignment with `dashboard.html` indicators. | **Partial** — criteria snapshot + mapping section in workbook. |
 
 ## Phase 4 — Published docs site (`docs.domain.com`)
 
-| ID | Milestone |
-|----|-----------|
-| M4.1 | Static site generator + theme + navigation. |
-| M4.2 | CI: build + link check; optional deploy to `docs` subdomain. |
-| M4.3 | Versioning policy (per release vs date-stamped). |
+| ID | Milestone | Status |
+|----|-----------|--------|
+| M4.1 | Static site generator + theme + navigation. | **Done** (same as M0.1). |
+| M4.2 | CI: build + link check; optional deploy to `docs` subdomain. | **Partial** — `.github/workflows/docs.yml` builds on push/PR; deploy & link check TODO. |
+| M4.3 | Versioning policy (per release vs date-stamped). | **Todo** |
 
 ## Phase 5 — Debt & maintenance
 

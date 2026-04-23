@@ -61,3 +61,9 @@ python3 -m venv .venv
 ```
 
 Contributor rules: [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## CI
+
+GitHub Actions builds the site with `mkdocs build --strict` on pushes and PRs to `main` (see `.github/workflows/docs.yml`). Artefact: `site/` zip per run.
+
+Publishing steps: [docs/PUBLISHING.md](docs/PUBLISHING.md).

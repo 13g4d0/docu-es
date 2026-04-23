@@ -63,6 +63,7 @@ nav:
       - TdR executive summary: tor-gap/tdr-executive-summary.md
       - Criteria (dashboard snapshot): tor-gap/criteria-from-dashboard.md
       - Gap workbook: tor-gap/gap-analysis-workbook.md
+      - Doc roadmap from gaps: tor-gap/documentation-roadmap-from-gaps.md
       - Organizer notes: tor-gap/organizer-notes.md
   - ADRs:
       - Index: adr/README.md
@@ -70,6 +71,7 @@ nav:
       - ADR 0002 Gateway: adr/0002-gateway-single-openai-entrypoint.md
       - ADR 0003 Layout: adr/0003-identiarag-openwebui-sibling-layout.md
   - Meta:
+      - Publishing site: PUBLISHING.md
       - Internal references: meta/internal-references.md
       - Milestone roadmap: ROADMAP-MILESTONES.md
       - Private repo & push: PRIVATE-REPO-AND-PUSH.md

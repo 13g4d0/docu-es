@@ -12,6 +12,7 @@ This section links **MAP–BID** procurement context, the **interactive dashboar
 | [Executive summary (TdR)](tdr-executive-summary.md) | M3.1 — Objectives, BOT modality, scope in brief (bilingual cues). |
 | [Evaluation criteria (from dashboard)](criteria-from-dashboard.md) | Structured rubric mirrored from `dashboard.html` (`CRITERIA` array). |
 | [Gap analysis workbook](gap-analysis-workbook.md) | M3.2–M3.3 — matrix template + gap report outline. |
+| [Documentation roadmap from gaps](documentation-roadmap-from-gaps.md) | M3.4 — turn gaps into doc backlog. |
 | [Organizer notes](organizer-notes.md) | Paste **your** notes; scrub before sharing. |
 
 ## Extraction tooling

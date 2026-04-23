@@ -53,7 +53,9 @@ Documentation is written for a **private** GitHub repository. **Do not** embed A
 | [TdR executive summary](tor-gap/tdr-executive-summary.md) | Stakeholders |
 | [Criteria (dashboard)](tor-gap/criteria-from-dashboard.md) | Evaluators |
 | [Gap workbook](tor-gap/gap-analysis-workbook.md) | Delivery team |
+| [Doc roadmap from gaps](tor-gap/documentation-roadmap-from-gaps.md) | Tech writer / lead |
 | [Organizer notes](tor-gap/organizer-notes.md) | You (scrub before commit) |
+| [Publishing](PUBLISHING.md) | DevOps |
 
 ## Milestones
 
