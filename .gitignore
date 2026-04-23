@@ -1,0 +1,6 @@
+# Local-only artefacts (public repo: do not commit client ToR / binaries by default)
+incoming/*.pdf
+incoming/*.PDF
+*.pem
+.env
+.env.*
