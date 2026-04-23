@@ -29,6 +29,12 @@ El sitio MkDocs correcto tiene **barra superior con pestañas** (Home, As-built,
 
 El workflow **copia `.nojekyll` a `site/`** tras `mkdocs build` para que, si Pages mezclara Jekyll, no procese los HTML estáticos.
 
+### Diagramas Mermaid
+
+Los diagramas usan la **configuración nativa de Material** (`pymdownx.superfences` + `custom_fences` para `mermaid`). No uses el plugin `mkdocs-mermaid2` al mismo tiempo: rompe el renderizado.
+
+Si tras publicar no ves los diagramas: recarga forzada (**Ctrl+F5**) y comprueba en las herramientas de desarrollador (**Consola**) si algún bloqueador o CSP impide cargar el script de Mermaid (Material lo carga desde CDN en el bundle).
+
 The workflow file is `.github/workflows/docs.yml`: on every **push** to `main` it runs `mkdocs build --strict`, then **upload-pages-artifact** + **deploy-pages**.
 
 ### Private repository note

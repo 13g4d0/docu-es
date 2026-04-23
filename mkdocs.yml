@@ -26,7 +26,12 @@ theme:
     - content.code.copy
 
 markdown_extensions:
-  - pymdownx.superfences
+  # Native Mermaid in Material (do not use mkdocs-mermaid2 alongside — it conflicts)
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - tables
@@ -79,4 +84,3 @@ nav:
 
 plugins:
   - search
-  - mermaid2
