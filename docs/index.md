@@ -30,6 +30,21 @@ Documentation is written for a **private** GitHub repository. **Do not** embed A
 | [ADRs](adr/README.md) | Architects | Accepted decisions. |
 | [Internal references](meta/internal-references.md) | Staff | Pointers to devops dashboard (no secrets). |
 
+## User guide
+
+| Page | Audience |
+|------|----------|
+| [Open-WebUI basics](user-guide/open-webui-basics.md) | End users |
+| [Models & gateway](user-guide/models-and-gateway.md) | Users & workspace admins |
+| [IdentiaRAG for analysts](user-guide/identiarag-for-analysts.md) | Analysts / operators |
+
+## Developer
+
+| Page | Audience |
+|------|----------|
+| [Onboarding](developer/onboarding.md) | Engineers joining the project |
+| [Fork & upstream policy](developer/fork-upstream-policy.md) | Maintainers |
+
 ## Milestones
 
 Progress is tracked in [ROADMAP-MILESTONES.md](ROADMAP-MILESTONES.md). Git pushes to `origin` are batched **per milestone**; see [PRIVATE-REPO-AND-PUSH.md](PRIVATE-REPO-AND-PUSH.md).

@@ -2,7 +2,7 @@
 
 Suggested order. Treat each milestone as a shippable slice (PR-sized where possible).
 
-**Status (rolling):** **Phase 0–1 as-built baseline complete** in `docu`; next focus is Phase 2 (user/dev guides) then Phase 3 (TdR gap vs `incoming/tdr.pdf`).
+**Status (rolling):** Phases **0–2** complete in `docu`; next focus is **Phase 3** (TdR gap vs `incoming/tdr.pdf`) when you are ready to extract text from the PDF on a secure workstation.
 
 ## Phase 0 — Bootstrap
 
@@ -30,11 +30,11 @@ Suggested order. Treat each milestone as a shippable slice (PR-sized where possi
 
 ## Phase 2 — Users & developers
 
-| ID | Milestone |
-|----|-----------|
-| M2.1 | End-user guides (Open-WebUI usage, models, policies as deployed). |
-| M2.2 | Developer onboarding: clone, build, test, PR conventions. |
-| M2.3 | Fork vs upstream boundaries (`open-webui`, etc.). |
+| ID | Milestone | Status |
+|----|-----------|--------|
+| M2.1 | End-user guides (Open-WebUI usage, models, policies as deployed). | **Done** — `user-guide/open-webui-basics.md`, `models-and-gateway.md`, `identiarag-for-analysts.md`. |
+| M2.2 | Developer onboarding: clone, build, test, PR conventions. | **Done** — `developer/onboarding.md`. |
+| M2.3 | Fork vs upstream boundaries (`open-webui`, etc.). | **Done** — `developer/fork-upstream-policy.md`. |
 
 ## Phase 3 — TdR & gap (after solid as-built)
 

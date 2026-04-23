@@ -51,6 +51,13 @@ nav:
       - Operations runbook: as-built/operations-runbook.md
       - Observability: as-built/observability.md
       - Request sequences: as-built/sequence-requests.md
+  - User guide:
+      - Open-WebUI basics: user-guide/open-webui-basics.md
+      - Models & gateway: user-guide/models-and-gateway.md
+      - IdentiaRAG for analysts: user-guide/identiarag-for-analysts.md
+  - Developer:
+      - Onboarding: developer/onboarding.md
+      - Fork & upstream policy: developer/fork-upstream-policy.md
   - ADRs:
       - Index: adr/README.md
       - ADR 0001 MkDocs: adr/0001-use-mkdocs-for-docu.md
