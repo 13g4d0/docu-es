@@ -120,7 +120,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 |-------|--------|
 | APIs públicas sin aislamiento | 0 |
 | APIs comerciales sin detalle privacidad | 1 |
-| Enterprise APIs con DPA + no-entrenamiento | 2 |
+| Enterprise APIs con DPA + no-entrenamiento | 2 ✅ |
 
 ### 8.2.3-C — Arquitectura de Red y Residencia de Datos (**max 2**)
 
