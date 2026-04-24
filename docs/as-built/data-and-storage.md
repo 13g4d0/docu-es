@@ -6,7 +6,7 @@ Sin credenciales en vivo ni nombres de host. Los **nombres** de variables coinci
 
 ### Base de datos principal
 
-Configurada vía `DATABASE_URL` (ver `backend/open_webui/env.py`). Por defecto **SQLite** bajo `DATA_DIR` (`webui.db`). En producción suele usarse **PostgreSQL** con `DATABASE_TYPE`, `DATABASE_HOST`, `DATABASE_USER`, `DATABASE_PASSWORD`, `DATABASE_NAME`, etc.
+Configurada vía `DATABASE_URL` (ver módulo de entorno del backend de UI, `backend/<ui_backend>/env.py`). Por defecto **SQLite** bajo `DATA_DIR` (`webui.db`). En producción suele usarse **PostgreSQL** con `DATABASE_TYPE`, `DATABASE_HOST`, `DATABASE_USER`, `DATABASE_PASSWORD`, `DATABASE_NAME`, etc.
 
 ```mermaid
 erDiagram

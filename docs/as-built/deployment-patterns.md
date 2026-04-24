@@ -27,7 +27,7 @@ stateDiagram-v2
   [*] --> Stopped
   Stopped --> Building: rebuild-webui
   Building --> Running: deploy-webui
-  Stopped --> Running: open-webui
+  Stopped --> Running: ui-chat
   Running --> Stopped: down
 ```
 

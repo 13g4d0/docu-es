@@ -24,7 +24,7 @@ flowchart LR
 
 1. Etiqueta el fork antes de fusionar *upstream* (`pre-merge-<fecha>`).
 2. Fusiona la rama o etiqueta **minor** de *upstream* más cercana a tu base (`0.8.12` en el momento de esta doc).
-3. Resuelve conflictos en `package-lock`, componentes Svelte y `backend/open_webui/env.py`.
+3. Resuelve conflictos en `package-lock`, componentes Svelte y el módulo de entorno del backend de UI (`backend/<ui_backend>/env.py`).
 4. Ejecuta **lint + build + humo de chat** antes de promover la imagen.
 
 ## Linaje del servicio RAG

@@ -1,6 +1,6 @@
 # Interfaz web de chat — routers HTTP (vista por componentes)
 
-Mapa de **routers FastAPI** registrados en `backend/open_webui/main.py` (instantánea del fork). Los *feature flags* pueden omitir routers (p. ej. SCIM, analíticas admin).
+Mapa de **routers FastAPI** registrados en el módulo principal del backend de UI (`backend/<ui_backend>/main.py`, instantánea del fork). Los *feature flags* pueden omitir routers (p. ej. SCIM, analíticas admin).
 
 ## Diagrama de routers
 
@@ -110,7 +110,7 @@ flowchart TB
 | `/api/v1/terminals` | Integración de terminal web. |
 | `/api/v1/scim/v2` | Aprovisionamiento SCIM (*flag* opcional). |
 
-## Modelos SQLAlchemy (`backend/open_webui/models/`)
+## Modelos SQLAlchemy (`backend/<ui_backend>/models/`)
 
 Módulos representativos: `chats`, `chat_messages`, `users`, `auths`, `knowledge`, `files`, `groups`, `memories`, `tools`, `functions`, … — ver [Datos y almacenamiento](data-and-storage.md).
 

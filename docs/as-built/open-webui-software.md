@@ -25,7 +25,7 @@ flowchart TB
   UI -->|REST + SSE| MAIN
 ```
 
-El backend arranca en `backend/open_webui/main.py` (gran aplicación FastAPI con SQLAlchemy, Redis opcional, tareas en segundo plano).
+El backend arranca en el módulo principal del backend (`backend/<ui_backend>/main.py`) como una gran aplicación FastAPI con SQLAlchemy, Redis opcional y tareas en segundo plano.
 
 ## Integración con el servicio RAG (patrón dev)
 

@@ -33,7 +33,7 @@ El RBAC exacto lo configura vuestro despliegue; no asumas los valores por defect
 
 ## Nota sobre nombre de instancia
 
-El fork puede fijar `WEBUI_NAME` (ver `backend/open_webui/env.py`). La copia de la UI y el favicon pueden seguir mostrando recursos *upstream* salvo que el fork los sustituya.
+El fork puede fijar `WEBUI_NAME` (ver el módulo de entorno del backend de UI, `backend/<ui_backend>/env.py`). La copia de la UI y el favicon pueden seguir mostrando recursos *upstream* salvo que el fork los sustituya.
 
 ## Relacionado
 
