@@ -162,7 +162,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 | Nivel | Puntos |
 |-------|--------|
 | Cierre abrupto sin acompañamiento | 0 |
-| Período de shadowing con supervisión | 1 |
+| Período de shadowing con supervisión | 1 ✅ |
 
 ---
 
