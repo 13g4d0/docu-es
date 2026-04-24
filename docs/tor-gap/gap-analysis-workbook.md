@@ -27,8 +27,8 @@ quadrantChart
   quadrant-3 Monitorizar
   quadrant-4 Replantear
   BYOK: [0.85, 0.75]
-  Agent loops: [0.65, 0.55]
-  Golden dataset: [0.45, 0.80]
+  Agent_loops: [0.65, 0.55]
+  Golden_dataset: [0.45, 0.80]
 ```
 
 *(Sustituye los puntos de ejemplo por los resultados de vuestro taller.)*
