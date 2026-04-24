@@ -9,7 +9,7 @@ sequenceDiagram
   autonumber
   actor U as Usuario
   participant UI as FastAPI servicio RAG
-  participant V as Vespa
+  participant V as VectorDB
   participant L as API LLM
 
   U->>UI: Enviar pregunta
@@ -53,7 +53,7 @@ sequenceDiagram
 sequenceDiagram
   participant W as Interfaz web de chat
   participant R as Servicio RAG
-  participant V as Vespa
+  participant V as VectorDB
 
   W->>R: HTTP por función
   R->>V: Recuperación

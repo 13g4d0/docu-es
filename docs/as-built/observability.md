@@ -7,7 +7,7 @@ En qué puedes apoyarte **hoy** según código y Compose, más brechas explícit
 | Componente | Patrón de endpoint | Fuente |
 |------------|-------------------|--------|
 | UI servicio RAG (Compose) | `GET /health` en el puerto del servicio | *healthcheck* en `compose.yml` |
-| Vespa | *ApplicationStatus* del *config server* | *healthcheck* en `compose.yml` |
+| VectorDB | *ApplicationStatus* del *config server* | *healthcheck* en `compose.yml` |
 | Pasarela (Compose de ejemplo) | `GET /health/liveliness` en puerto de contenedor **4000** | `docker-compose.yml` del proyecto pasarela |
 | Servicio de agentes | Depende de la imagen; usar *health* del puerto API publicado si existe | mapeo de puertos Compose |
 
@@ -33,7 +33,7 @@ flowchart LR
 
 ## Logging
 
-- **Docker**: `docker logs -f <contenedor>` para interfaz, servicio RAG, Vespa, pasarela, servicio de agentes.
+- **Docker**: `docker logs -f <contenedor>` para interfaz, servicio RAG, VectorDB, pasarela, servicio de agentes.
 - **Servicio RAG**: logging Python vía helpers `identiarag.logger`.
 - **Interfaz web de chat**: logs estructurados FastAPI / Uvicorn; nivel con variables documentadas *upstream*.
 

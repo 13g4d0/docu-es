@@ -23,7 +23,7 @@ flowchart LR
 
 | Repositorio / artefacto | Rol |
 |-------------------------|-----|
-| **Servicio RAG** | Motor RAG, integración Vespa, FastAPI `identiarag.api:app`, CLI `identiarag`. |
+| **Servicio RAG** | Motor RAG, integración VectorDB, FastAPI `identiarag.api:app`, CLI `identiarag`. |
 | **Fork interfaz chat** | Producto de chat; el build produce una etiqueta de imagen (p. ej. `open-webui:local`) usada por `dev-stack.sh`. |
 | **devops** | Scripts operativos, markdown de arquitectura, activos de tablero de deuda (ruta variable por host). |
 | **Este repo** | Fuente del sitio MkDocs de documentación humana. |

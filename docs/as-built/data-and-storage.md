@@ -50,9 +50,9 @@ El esquema real tiene más tablas (`tags`, `folders`, `groups`, …); el diagram
 
 Según `identiarag/api.py`, los ajustes cargan desde **`~/.identiarag/settings.json`** (helper `_get_settings_file_path`). Contiene estado de UI como `active_project`, `hits`, `k`, etc.
 
-### Vespa
+### VectorDB
 
-- **Modo Docker**: datos de Vespa en volumen con nombre (`vespa_data` en `compose.yml`).
+- **Modo Docker**: datos del VectorDB en volumen con nombre (`vespa_data` en `compose.yml`).
 - **Salida de proyecto**: *bind mount* `./output` para artefactos indexados y exportaciones.
 - **Modo nube**: TLS / token aparte (ver rutas de código alrededor de `get_cloud_secret_token`).
 
@@ -60,7 +60,7 @@ Según `identiarag/api.py`, los ajustes cargan desde **`~/.identiarag/settings.j
 flowchart LR
   subgraph identia_data [Plano de datos servicio RAG]
     OUT[volumen ./output]
-    VDB[(volumen Vespa)]
+    VDB[(volumen VectorDB)]
     HF[(volumen caché HuggingFace)]
   end
 
@@ -83,7 +83,7 @@ Con `STORE_MODEL_IN_DB=True`, definiciones de modelo y metadatos de enrutado viv
 |---------|---------|
 | `DATA_DIR` / DB de la interfaz | Usuarios, chats, configuración. |
 | Postgres de la pasarela | Alias de modelo, *fallbacks*, metadatos de uso. |
-| `output/` del servicio RAG + volumen Vespa | Corpus indexado; costoso de reconstruir. |
+| `output/` del servicio RAG + volumen VectorDB | Corpus indexado; costoso de reconstruir. |
 | `~/.identiarag/settings.json` | Estado UX del operador. |
 
 ---

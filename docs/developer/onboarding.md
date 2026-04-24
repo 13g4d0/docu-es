@@ -29,7 +29,7 @@ flowchart TB
 | Herramienta | Notas |
 |-------------|--------|
 | **Git** | SSH o HTTPS a vuestros remotos. |
-| **Docker** | Para Vespa, builds de imagen de la interfaz, stacks Compose. |
+| **Docker** | Para VectorDB, builds de imagen de la interfaz, stacks Compose. |
 | **Python 3.10–3.13** | Restricción en `pyproject.toml` del servicio RAG. |
 | **Node + npm** | Build frontend/backend de la interfaz (`package.json`). |
 | **uv** (opcional) | Sincronización más rápida de entornos Python al estilo *upstream*. |
@@ -45,7 +45,7 @@ pip install -e ".[dev]"
 identiarag --help
 ```
 
-Ejecuta la API local según el README del proyecto (`identiarag` CLI + uvicorn). Usa `compose.yml` cuando necesites Vespa real.
+Ejecuta la API local según el README del proyecto (`identiarag` CLI + uvicorn). Usa `compose.yml` cuando necesites VectorDB real.
 
 ## Interfaz web de chat — build desde fork
 

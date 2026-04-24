@@ -23,7 +23,7 @@ flowchart LR
   ds --> dk
 ```
 
-## Servicio RAG + Compose Vespa
+## Servicio RAG + Compose VectorDB
 
 Desde la raíz del repositorio del servicio RAG:
 
@@ -31,7 +31,7 @@ Desde la raíz del repositorio del servicio RAG:
 docker compose up -d
 ```
 
-Usa `docker compose ps` y *healthchecks* definidos en `compose.yml` (Vespa `ApplicationStatus`, UI `curl /health`).
+Usa `docker compose ps` y *healthchecks* definidos en `compose.yml` (VectorDB `ApplicationStatus`, UI `curl /health`).
 
 ## Ciclo de vida de la imagen de la interfaz
 
@@ -49,7 +49,7 @@ Suelen vivir en **proyectos Compose separados** en el host. Operarlos con `docke
 ## Orden de triage ante incidentes
 
 1. **Salud de contenedores** — `docker ps`, *healthchecks* de Compose.
-2. **Logs** — `docker logs <contenedor>` (pasarela, interfaz, servicio RAG, Vespa).
+2. **Logs** — `docker logs <contenedor>` (pasarela, interfaz, servicio RAG, VectorDB).
 3. **Conectividad** — desde el servidor de apps, `curl` a URLs **internas** (pasarela `/health`, servicio RAG `/health` si está expuesto).
 4. **Malla / inferencia local** — si usáis enrutado híbrido, verificar estado de la VPN antes de depurar código de aplicación.
 

@@ -18,7 +18,7 @@ El layout de clones es por organización; configura `DEVOPS_STACK_SCRIPT` o `DEV
 | Ruta | Uso |
 |------|-----|
 | `dev-stack.sh` | Orquestación interfaz de chat + servicio RAG. |
-| `compose.yml` | Vespa + UI + agent-embed opcional. |
+| `compose.yml` | VectorDB + UI + agent-embed opcional. |
 | `documentation/` | Árbol de docs *upstream* del servicio RAG (distinto de este sitio MkDocs). |
 
 ## Relación con M0.3

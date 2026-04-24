@@ -21,7 +21,7 @@ flowchart TB
   end
 
   subgraph data [Capa de datos]
-    V[Vespa]
+    V[VectorDB]
     PG[(Postgres)]
     RD[(Redis opcional)]
   end

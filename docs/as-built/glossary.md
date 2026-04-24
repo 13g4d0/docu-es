@@ -2,8 +2,8 @@
 
 | Término | Significado en esta solución |
 |---------|------------------------------|
-| **Servicio RAG** | Paquete Python y aplicación FastAPI para RAG por etapas (expansión de consulta → embeddings → Vespa → respuesta LLM). En el código coexisten rutas heredadas del paquete histórico `nyrag`. |
-| **Vespa** | Motor de búsqueda híbrido / vectorial (`pyvespa`, perfiles de ranking). |
+| **Servicio RAG** | Paquete Python y aplicación FastAPI para RAG por etapas (expansión de consulta → embeddings → VectorDB → respuesta LLM). En el código coexisten rutas heredadas del paquete histórico `nyrag`. |
+| **VectorDB** | Motor de búsqueda híbrido / vectorial usado como base de recuperación en la solución. |
 | **Interfaz web de chat** | UI y hub API de chat autohospedados (fork). Frontend: SvelteKit; backend: FastAPI + SQLAlchemy + Redis opcional. |
 | **Pasarela de inferencia** | **Gateway** compatible OpenAI: alias de modelo, enrutado, *fallbacks*; a menudo respaldado por PostgreSQL si `STORE_MODEL_IN_DB` está activo. |
 | **Proveedor agregador en la nube** | API que concentra modelos de varios proveedores; suele usarse como **fallback** tras la pasarela. |

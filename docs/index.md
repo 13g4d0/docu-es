@@ -2,7 +2,7 @@
 
 Este sitio describe la integración **actual** de:
 
-- **Servicio RAG** — pipeline RAG (Vespa, embeddings, FastAPI UI/API).
+- **Servicio RAG** — pipeline RAG (VectorDB, embeddings, FastAPI UI/API).
 - **Interfaz web de chat** — plataforma de chat autohospedada derivada de fork (frontend SvelteKit + backend FastAPI).
 - **Pasarela de inferencia** — enrutado compatible OpenAI (pasarela unificada), inferencia local opcional (runtime en escritorio) y proveedores en la nube (API agregadora de modelos), con transporte privado en malla (VPN entre nodos) donde aplique.
 - **Servicio de agentes** — pila opcional de mensajería/agentes (ciclo de vida Compose independiente).

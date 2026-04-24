@@ -1,6 +1,6 @@
 # Patrones de despliegue
 
-## Patrón A — Servicio RAG + Vespa vía Docker Compose
+## Patrón A — Servicio RAG + VectorDB vía Docker Compose
 
 Usa `compose.yml` en la raíz del repositorio del servicio RAG:
 
@@ -8,7 +8,7 @@ Usa `compose.yml` en la raíz del repositorio del servicio RAG:
 docker compose up -d
 ```
 
-Levanta **Vespa**, el build de imagen **UI del servicio RAG** y opcionalmente **agent-embed** con variables de entorno relacionadas con voz en tiempo real (*LiveKit*).
+Levanta **VectorDB**, el build de imagen **UI del servicio RAG** y opcionalmente **agent-embed** con variables de entorno relacionadas con voz en tiempo real (*LiveKit*).
 
 ## Patrón B — Interfaz web de chat vía `dev-stack.sh`
 
@@ -36,7 +36,7 @@ stateDiagram-v2
 La **pasarela** + Postgres y el **servicio de agentes** suelen vivir en **directorios Compose aparte** en el host, gestionados por la UI del proveedor o `docker compose` manual. Comparten *network namespace* **solo si** los unes al mismo bridge definido por el usuario; si no, hablan por puertos publicados en `localhost` o vía *reverse proxy*.
 
 !!! warning "Manejo de secretos"
-    Usa `.env` ignorado por git o un gestor de secretos. No versiones `LITELLM_MASTER_KEY`, contraseñas de base ni tokens de proveedor.
+    Usa `.env` ignorado por git o un gestor de secretos. No versiones `ORQUESTADOR_MASTER_KEY`, contraseñas de base ni tokens de proveedor.
 
 ## Patrón D — Sitio de documentación (este repo)
 

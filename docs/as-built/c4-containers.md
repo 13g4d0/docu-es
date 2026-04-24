@@ -5,7 +5,7 @@ Unidades ejecutables e independientes. Los puertos son **valores por defecto del
 ```mermaid
 flowchart TB
   subgraph identia_compose [compose.yml del servicio RAG]
-    vespa[Vespa :8080 / :19071]
+    vectordb[VectorDB :8080 / :19071]
     ui[Build UI servicio RAG :8000]
     embed[agent-embed :3000]
   end
@@ -15,9 +15,9 @@ flowchart TB
   end
 
   subgraph gateway_stack [Patrón Compose pasarela]
-    litellm[Pasarela :4000 interno]
+    orquestador[Pasarela :4000 interno]
     pg[(PostgreSQL)]
-    litellm --> pg
+    orquestador --> pg
   end
 
   subgraph hermes_stack [Patrón Compose agentes]
@@ -26,11 +26,11 @@ flowchart TB
 
   browser((Navegador)) --> ui
   browser --> webui
-  browser --> litellm
-  ui --> vespa
+  browser --> orquestador
+  ui --> vectordb
   webui -->|IDENTIARAG_BASE_URL| ui
-  webui --> litellm
-  hermes -.->|opcional| litellm
+  webui --> orquestador
+  hermes -.->|opcional| orquestador
 ```
 
 ## Referencia de puertos (por defecto en el árbol)
@@ -38,7 +38,7 @@ flowchart TB
 | Contenedor / proceso | Puerto host por defecto | Notas |
 |------------------------|-------------------------|--------|
 | UI servicio RAG (`compose.yml` → `ui`) | `8000` | FastAPI + UI estática (`identiarag.api:app`). |
-| Vespa | `8080`, `19071` | Consulta + *config server*. |
+| VectorDB | `8080`, `19071` | Consulta + *config server*. |
 | agent-embed | `3000` | Contexto de imagen aparte `../agent-embed`. |
 | Interfaz de chat (`dev-stack.sh`) | `3000` → contenedor `8080` | `-p OPEN_WEBUI_HOST_PORT:OPEN_WEBUI_CONTAINER_PORT`. |
 | Pasarela (Compose de ejemplo) | publicado por el host | La app interna escucha en **4000** en el archivo de ejemplo; el mapeo del host varía. |
@@ -50,4 +50,4 @@ flowchart TB
 - **Interfaz de chat**: volumen con nombre en `/app/backend/data` en el patrón `dev-stack.sh`.
 - **Pasarela**: volumen Postgres para registro de modelos si el modo DB está activo.
 
-**No** documentes valores secretos; solo **nombres** de variables en Compose (p. ej. `LITELLM_MASTER_KEY`, patrón `DATABASE_URL`).
+**No** documentes valores secretos; solo **nombres** de variables en Compose (p. ej. `ORQUESTADOR_MASTER_KEY`, patrón `DATABASE_URL`).

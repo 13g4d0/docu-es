@@ -3,7 +3,7 @@
 Describe el **patrón** desplegado junto a la interfaz web de chat: una única **pasarela compatible OpenAI** (en el despliegue de referencia se usa un producto concreto de ese tipo) con inferencia **local** opcional en estación de trabajo y **fallback** en la nube.
 
 !!! note "Sin credenciales en vivo"
-    No almacenes `LITELLM_MASTER_KEY`, claves de proveedor ni IPs de red privada en este repositorio. Configúralas solo en el entorno de ejecución.
+    No almacenes `ORQUESTADOR_MASTER_KEY`, claves de proveedor ni IPs de red privada en este repositorio. Configúralas solo en el entorno de ejecución.
 
 ## Arquitectura lógica
 
