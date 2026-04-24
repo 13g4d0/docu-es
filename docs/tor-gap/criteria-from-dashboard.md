@@ -16,7 +16,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 | Nivel | Puntos |
 |-------|--------|
 | 0 proyectos | 0 |
-| 2 proyectos | 5 |
+| 2 proyectos | 5 ✅ |
 | 3 o más proyectos | 10 |
 
 ### 8.1.2 — Experiencia en Contexto Normativo y Legal (**max 5**)
@@ -25,7 +25,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 
 | Nivel | Puntos |
 |-------|--------|
-| No presenta proyecto | 0 |
+| No presenta proyecto | 0 ✅ |
 | Presenta proyecto calificado | 5 |
 
 ### 8.1.3 — Experiencia en Soberanía y Seguridad de Datos (**max 5**)
@@ -36,7 +36,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 |-------|--------|
 | No presenta | 0 |
 | APIs estándar sin anonimización | 2 |
-| BYOK / nube privada / open-source local | 5 |
+| BYOK / nube privada / open-source local | 5 ✅ |
 
 ---
 
@@ -49,7 +49,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 | Nivel | Puntos |
 |-------|--------|
 | Insuficiente | 0 |
-| Bueno: cadena lineal simple | 3 |
+| Bueno: cadena lineal simple | 3 ✅ |
 | Muy Bueno: loops de reflexión | 4 |
 
 ### 8.2.1.1-B — Auto-Corrección y Verificación de Alucinaciones (**max 3**)
