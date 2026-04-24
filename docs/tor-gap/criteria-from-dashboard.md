@@ -132,6 +132,9 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 | Cloud estándar sin aislamiento de red | 1 ✅ |
 | VPC + Private Links + residencia | 2 |
 
+!!! note "Matiz (implementación actual)"
+    El despliegue de referencia segmenta el tramo **pasarela ↔ inferencia en estación de trabajo** mediante una **VPN en malla** entre nodos (overlay cifrado; patrón habitual con *remote link* del runtime local de modelos). Eso **refuerza la confidencialidad y el control** de ese enlace frente a exponerlo en Internet abierto, pero **no equivale** por sí solo al paquete del TdR **VPC + Private Links + residencia regional** en proveedor cloud. Por eso se conserva la puntuación **1** hasta documentar explícitamente VPC/endpoints privados y política de residencia.
+
 ### 8.2.4-A — Programa de Capacitación Técnica BOT (**max 2**)
 
 **TdR wording:** Talleres hands-on para equipo TI del MAP: administración de BD vectorial, prompt engineering, monitoreo de costos de API.
