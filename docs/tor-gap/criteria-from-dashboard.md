@@ -143,7 +143,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 |-------|--------|
 | Plan vago o genérico | 0 |
 | Capacitaciones estándar para usuarios finales | 1 |
-| Talleres técnicos específicos para TI | 2 |
+| Talleres técnicos específicos para TI | 2 ✅ |
 
 ### 8.2.4-B — Documentación de Arquitectura y Código (**max 2**)
 
