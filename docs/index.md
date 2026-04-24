@@ -19,7 +19,7 @@ La documentación está pensada para un repositorio **privado** en GitHub. **No*
 | [Servicio RAG](as-built/identiarag-software.md) | Backend | Pipeline, APIs, servicios Compose. |
 | [Interfaz web de chat](as-built/open-webui-software.md) | Full-stack | Estructura monolito, puntos de extensión. |
 | [Pasarela de inferencia](as-built/inference-gateway.md) | Plataforma | Enrutado híbrido local + nube. |
-| [Servicio de agentes](as-built/hermes-agent.md) | Integraciones | Contenedor de agentes, superficie API (alto nivel). |
+| [Servicio de agentes](as-built/agent-service.md) | Integraciones | Contenedor de agentes, superficie API (alto nivel). |
 | [Routers HTTP](as-built/open-webui-routers.md) | Backend | Mapa de prefijos FastAPI. |
 | [Datos y almacenamiento](as-built/data-and-storage.md) | Backend / DBA | Bases, volúmenes, prioridades de backup. |
 | [Red y seguridad](as-built/network-security-matrix.md) | Seguridad | Matriz de flujos y clases de puerto. |

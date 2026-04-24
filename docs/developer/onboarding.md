@@ -12,7 +12,7 @@ Las URLs de clone y los nombres de host son **de tu organización** — esta pá
   documentacion/       # este sitio MkDocs
 ```
 
-Sobrescribe rutas con `OPEN_WEBUI_ROOT`, `DEVOPS_IDENTIARAG_ROOT` o `DEVOPS_STACK_SCRIPT` si el layout difiere.
+Sobrescribe rutas con `UI_ROOT`, `DEVOPS_IDENTIARAG_ROOT` o `DEVOPS_STACK_SCRIPT` si el layout difiere.
 
 ```mermaid
 flowchart TB

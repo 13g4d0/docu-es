@@ -29,4 +29,4 @@ flowchart LR
 | **Este repo** | Fuente del sitio MkDocs de documentación humana. |
 | **Directorios Compose en el host** | Proyectos Docker Compose independientes (p. ej. DB + proxy de pasarela, servicio de agentes) gestionados fuera de `dev-stack.sh` en algunos hosts. |
 
-**Convención de rutas (host de desarrollo):** suele clonarse en directorios hermanos (p. ej. carpeta del fork junto al del servicio RAG) para que `IDENTIARAG_ROOT` / `OPEN_WEBUI_ROOT` resuelvan bien en `dev-stack.sh`. El layout exacto del filesystem **no** se versiona aquí.
+**Convención de rutas (host de desarrollo):** suele clonarse en directorios hermanos (p. ej. carpeta del fork junto al del servicio RAG) para que `IDENTIARAG_ROOT` / `UI_ROOT` resuelvan bien en `dev-stack.sh`. El layout exacto del filesystem **no** se versiona aquí.

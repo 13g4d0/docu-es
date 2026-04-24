@@ -37,7 +37,7 @@ Usa `docker compose ps` y *healthchecks* definidos en `compose.yml` (VectorDB `A
 
 Desde el servicio RAG (vía `dev-stack.sh` u `ops.sh`):
 
-- **Rebuild / deploy** — construye la etiqueta configurada por `OPEN_WEBUI_IMAGE` (patrón por defecto `open-webui:local`) desde `OPEN_WEBUI_ROOT`.
+- **Rebuild / deploy** — construye la etiqueta configurada por `UI_IMAGE` (patrón por defecto `ui-chat:local`) desde `UI_ROOT`.
 
 ## Pasarela de inferencia y servicio de agentes
 

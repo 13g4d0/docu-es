@@ -50,7 +50,7 @@ nav:
       - Interfaz web de chat (software): as-built/open-webui-software.md
       - Routers HTTP de la interfaz de chat: as-built/open-webui-routers.md
       - Pasarela de inferencia: as-built/inference-gateway.md
-      - Servicio de agentes: as-built/hermes-agent.md
+      - Servicio de agentes: as-built/agent-service.md
       - Datos y almacenamiento: as-built/data-and-storage.md
       - Red y seguridad: as-built/network-security-matrix.md
       - Patrones de despliegue: as-built/deployment-patterns.md

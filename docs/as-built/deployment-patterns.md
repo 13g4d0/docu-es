@@ -16,11 +16,11 @@ El repo del servicio RAG incluye `dev-stack.sh`:
 
 | Comando | Efecto |
 |---------|--------|
-| `./dev-stack.sh deploy-webui` | Reconstruye la imagen de la interfaz desde `OPEN_WEBUI_ROOT` y arranca el contenedor con puerto publicado. |
+| `./dev-stack.sh deploy-webui` | Reconstruye la imagen de la interfaz desde `UI_ROOT` y arranca el contenedor con puerto publicado. |
 | `./dev-stack.sh up` | Arranca la interfaz y el servicio RAG en modo segundo plano (ver el script para el comportamiento exacto). |
 | `./dev-stack.sh health` | *Health probes* de la pila. |
 
-Variables como `OPEN_WEBUI_IMAGE`, `OPEN_WEBUI_HOST_PORT` y `OPEN_WEBUI_ROOT` ajustan rutas sin editar el script.
+Variables como `UI_IMAGE`, `UI_HOST_PORT` y `UI_ROOT` ajustan rutas sin editar el script.
 
 ```mermaid
 stateDiagram-v2

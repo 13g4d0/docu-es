@@ -20,8 +20,8 @@ flowchart TB
     orquestador --> pg
   end
 
-  subgraph hermes_stack [Patrón Compose agentes]
-    hermes[Servicio de agentes]
+  subgraph agent_stack [Patrón Compose agentes]
+    agent_svc[Servicio de agentes]
   end
 
   browser((Navegador)) --> ui
@@ -30,7 +30,7 @@ flowchart TB
   ui --> vectordb
   webui -->|IDENTIARAG_BASE_URL| ui
   webui --> orquestador
-  hermes -.->|opcional| orquestador
+  agent_svc -.->|opcional| orquestador
 ```
 
 ## Referencia de puertos (por defecto en el árbol)
@@ -40,7 +40,7 @@ flowchart TB
 | UI servicio RAG (`compose.yml` → `ui`) | `8000` | FastAPI + UI estática (`identiarag.api:app`). |
 | VectorDB | `8080`, `19071` | Consulta + *config server*. |
 | agent-embed | `3000` | Contexto de imagen aparte `../agent-embed`. |
-| Interfaz de chat (`dev-stack.sh`) | `3000` → contenedor `8080` | `-p OPEN_WEBUI_HOST_PORT:OPEN_WEBUI_CONTAINER_PORT`. |
+| Interfaz de chat (`dev-stack.sh`) | `3000` → contenedor `8080` | `-p UI_HOST_PORT:UI_CONTAINER_PORT`. |
 | Pasarela (Compose de ejemplo) | publicado por el host | La app interna escucha en **4000** en el archivo de ejemplo; el mapeo del host varía. |
 | Servicio de agentes | `8642` (+ interno `4860`) | Puerto publicado para API opcional en Compose de ejemplo. |
 
