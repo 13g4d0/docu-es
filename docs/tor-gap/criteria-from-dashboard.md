@@ -153,7 +153,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 |-------|--------|
 | Documentación vaga o inexistente | 0 |
 | Manuales de usuario funcionales básicos | 1 |
-| Documentación técnica exhaustiva + código comentado | 2 |
+| Documentación técnica exhaustiva + código comentado | 2 ✅ |
 
 ### 8.2.4-C — Estrategia de Transición y Shadowing (**max 1**)
 
