@@ -129,7 +129,7 @@ Esta página refleja el array JavaScript `CRITERIA` incrustado en **`map/dashboa
 | Nivel | Puntos |
 |-------|--------|
 | SaaS abierta en servidores públicos | 0 |
-| Cloud estándar sin aislamiento de red | 1 |
+| Cloud estándar sin aislamiento de red | 1 ✅ |
 | VPC + Private Links + residencia | 2 |
 
 ### 8.2.4-A — Programa de Capacitación Técnica BOT (**max 2**)
