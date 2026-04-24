@@ -19,16 +19,16 @@ Duplica el bloque por criterio (o impórtalo desde export CSV del tablero).
 
 ```mermaid
 quadrantChart
-  title Esfuerzo vs riesgo (ejemplo de colocación)
-  x-axis Bajo esfuerzo --> Alto esfuerzo
-  y-axis Bajo riesgo --> Alto riesgo
-  quadrant-1 Planificar con cuidado
-  quadrant-2 Victorias rápidas
-  quadrant-3 Monitorizar
-  quadrant-4 Replantear
-  BYOK: [0.85, 0.75]
-  Agent_loops: [0.65, 0.55]
-  Golden_dataset: [0.45, 0.80]
+    title Esfuerzo vs Riesgo (Ejemplo de Colocación)
+    x-axis "Bajo esfuerzo" --> "Alto esfuerzo"
+    y-axis "Bajo riesgo" --> "Alto riesgo"
+    quadrant-1 "Replantear"
+    quadrant-2 "Planificar con cuidado"
+    quadrant-3 "Victorias rápidas"
+    quadrant-4 "Monitorizar"
+    "BYOK": [0.85, 0.75]
+    "Agent_loops": [0.65, 0.55]
+    "Golden_dataset": [0.45, 0.80]
 ```
 
 *(Sustituye los puntos de ejemplo por los resultados de vuestro taller.)*
